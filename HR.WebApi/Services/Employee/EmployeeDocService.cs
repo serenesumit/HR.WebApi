@@ -27,6 +27,7 @@ namespace HR.WebApi.Services
             this._fileRepository = fileRepository;
         }
 
+
         public virtual MethodResult<EmployeeDoc> Add(EmployeeDoc model)
         {
             var result = new MethodResult<EmployeeDoc>();
@@ -71,12 +72,14 @@ namespace HR.WebApi.Services
 
         }
 
+       
+
 
         public virtual async Task<UpFile> AddFileAsync(string containerName, Guid resumeId, string filename, Stream fileStream)
         {
             try
             {
-                var path = string.Format(Constants.Azure.BlobPaths.EmployeeResumes, resumeId.ToString());
+                var path = string.Format(Constants.Azure.BlobPaths.Docs, resumeId.ToString());
                 // http://stackoverflow.com/questions/1029740/get-mime-type-from-filename-extension
                 var contentType = MimeMapping.GetMimeMapping(filename);
                 this._fileRepository.Initialize(storageAccount, containerName);

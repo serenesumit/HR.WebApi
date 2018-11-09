@@ -1,13 +1,15 @@
-﻿using System;
+﻿using ApiMultiPartFormData.Models;
+using HR.WebApi.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace HR.WebApi.Models
+namespace HR.WebApi.Helpers.Model
 {
-    public class Event
+    public class EventModel
     {
-        public Event()
+        public EventModel()
         {
             this.EventDocs = new List<EventDoc>();
         }
@@ -36,8 +38,8 @@ namespace HR.WebApi.Models
 
         public string Agenda { get; set; }
 
-        public virtual ICollection<EventDoc> EventDocs { get; set; }
+        public List<HttpFile> Files { get; set; }
 
-
+        public List<EventDoc> EventDocs { get; set; }
     }
 }

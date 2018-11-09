@@ -34,6 +34,8 @@ namespace HR.WebApi
                         //
                         c.SingleApiVersion("v1", "HR.WebApi");
 
+                        c.SchemaId(x => x.FullName);
+
                         // If you want the output Swagger docs to be indented properly, enable the "PrettyPrint" option.
                         //
                         //c.PrettyPrint();
@@ -61,7 +63,7 @@ namespace HR.WebApi
                         //c.BasicAuth("basic")
                         //    .Description("Basic HTTP Authentication");
                         //
-						// NOTE: You must also configure 'EnableApiKeySupport' below in the SwaggerUI section
+                        // NOTE: You must also configure 'EnableApiKeySupport' below in the SwaggerUI section
                         //c.ApiKey("apiKey")
                         //    .Description("API Key Authentication")
                         //    .Name("apiKey")
@@ -127,7 +129,7 @@ namespace HR.WebApi
                         // Swagger docs and UI. However, if you have multiple types in your API with the same class name, you'll
                         // need to opt out of this behavior to avoid Schema Id conflicts.
                         //
-                        //c.UseFullTypeNameInSchemaIds();
+                        c.UseFullTypeNameInSchemaIds();
 
                         // Alternatively, you can provide your own custom strategy for inferring SchemaId's for
                         // describing "complex" types in your API.
@@ -183,6 +185,8 @@ namespace HR.WebApi
                         // Very helpful when you have multiple Swagger pages open, to tell them apart.
                         //
                         //c.DocumentTitle("My Swagger UI");
+
+                       
 
                         // Use the "InjectStylesheet" option to enrich the UI with one or more additional CSS stylesheets.
                         // The file must be included in your project as an "Embedded Resource", and then the resource's

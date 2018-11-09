@@ -24,6 +24,12 @@ namespace HR.WebApi.Repositories.Common
 
         IDbSet<EmployeeDoc> EmployeeDocs { get; set; }
 
+        IDbSet<Event> Events { get; set; }
+
+        IDbSet<EventDoc> EventDocs { get; set; }
+
+        IDbSet<EventType> EventTypes { get; set; }
+
         int SaveChanges();
 
         Task<int> SaveChangesAsync();

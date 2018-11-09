@@ -1,3 +1,4 @@
+using HR.WebApi.Repositories;
 using HR.WebApi.Repositories.Common;
 using HR.WebApi.Services;
 using System;
@@ -45,9 +46,16 @@ namespace HR.WebApi
             // TODO: Register your type's mappings here.
             container.RegisterType<IDbContextRepository, DbContextRepository>();
             container.RegisterType<IFileRepository, AzureBlobStorageFileRepository>();
+
+            container.RegisterType<IEventRepository, EventRepository>();
+            container.RegisterType<IEventDocRepository, EventDocRepository>();
+
+            container.RegisterType<IEventDocService, EventDocService>();
+            container.RegisterType<IEventService, EventService>();
+
             container.RegisterType<IEmployeeService, EmployeeService>();
             container.RegisterType<IEmployeeDocService, EmployeeDocService>();
-            // container.RegisterType<IProductRepository, ProductRepository>();
+           
         }
     }
 }

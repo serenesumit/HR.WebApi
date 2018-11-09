@@ -3,6 +3,7 @@
 namespace HR.WebApi.Repositories.Common
 {
     using global::Repositories.Mapping;
+    using HR.WebApi.Mapping;
     using HR.WebApi.Models;
 
     #region using
@@ -33,6 +34,11 @@ namespace HR.WebApi.Repositories.Common
 
         public IDbSet<EmployeeDoc> EmployeeDocs { get; set; }
 
+        public IDbSet<Event> Events { get; set; }
+
+        public IDbSet<EventDoc> EventDocs { get; set; }
+
+        public IDbSet<EventType> EventTypes { get; set; }
 
 
         public DbContext DbContext
@@ -90,6 +96,9 @@ namespace HR.WebApi.Repositories.Common
             modelBuilder.Configurations.Add(new EmployeeMap());
             modelBuilder.Configurations.Add(new EmployeeDocMap());
 
+            modelBuilder.Configurations.Add(new EventMap());
+            modelBuilder.Configurations.Add(new EventTypeMap());
+            modelBuilder.Configurations.Add(new EventDocMap());
         }
     }
 }

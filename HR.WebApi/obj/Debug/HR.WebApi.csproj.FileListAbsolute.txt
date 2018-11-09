@@ -92,10 +92,10 @@ D:\Live Projects\HR.WebApi\HR.WebApi\bin\MultipartDataMediaFormatter.dll
 D:\Live Projects\HR.WebApi\HR.WebApi\bin\System.Web.Cors.dll
 D:\Live Projects\HR.WebApi\HR.WebApi\bin\System.Web.Http.Cors.dll
 D:\Live Projects\HR.WebApi\HR.WebApi\bin\System.Web.Http.Cors.xml
-D:\Live Projects\HR.WebApi\HR.WebApi\obj\Debug\HR.WebApi.csprojAssemblyReference.cache
 D:\Live Projects\HR.WebApi\HR.WebApi\obj\Debug\HR.WebApi.Migrations.employee.resources
 D:\Live Projects\HR.WebApi\HR.WebApi\obj\Debug\HR.WebApi.csproj.GenerateResource.cache
 D:\Live Projects\HR.WebApi\HR.WebApi\bin\Swashbuckle.Core.dll
 D:\Live Projects\HR.WebApi\HR.WebApi\bin\ApiMultiPartFormData.dll
 D:\Live Projects\HR.WebApi\HR.WebApi\bin\ApiMultiPartFormData.pdb
 D:\Live Projects\HR.WebApi\HR.WebApi\bin\ApiMultiPartFormData.dll.config
+D:\Live Projects\HR.WebApi\HR.WebApi\obj\Debug\HR.WebApi.csprojAssemblyReference.cache

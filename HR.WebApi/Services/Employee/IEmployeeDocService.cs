@@ -20,5 +20,6 @@ namespace HR.WebApi.Services
         Task<UpFile> AddFileAsync(string containerName, Guid resumeId, string filename, Stream fileStream);
 
         Task<bool> DeleteFileAsync(string path);
+        
     }
 }
