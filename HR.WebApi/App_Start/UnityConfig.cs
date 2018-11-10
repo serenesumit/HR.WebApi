@@ -55,7 +55,6 @@ namespace HR.WebApi
 
             container.RegisterType<IEmployeeService, EmployeeService>();
             container.RegisterType<IEmployeeDocService, EmployeeDocService>();
-<<<<<<< HEAD
 
 
             container.RegisterType<IContactRepository, ContactRepository>();
@@ -66,10 +65,6 @@ namespace HR.WebApi
             container.RegisterType<IContactService, ContactService>();
             container.RegisterType<INoteService, NoteService>();
             
-
-=======
-           
->>>>>>> event-branch
         }
     }
 }

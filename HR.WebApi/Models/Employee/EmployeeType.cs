@@ -7,7 +7,7 @@ namespace HR.WebApi.Models
 {
     public class EmployeeType
     {
-        public Guid? Id { get; set; }
+        public Int32 Id { get; set; }
 
         public string Name { get; set; }
     }

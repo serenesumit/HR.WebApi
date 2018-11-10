@@ -63,7 +63,7 @@ namespace HR.WebApi.Controllers
                     stream.Write(file.Buffer, 0, file.Buffer.Length);
                     ContactDoc contactDoc = new ContactDoc();
                     var maxid = this._contactDocService.GetMaxId();
-                    var fileResult = await this._contactDocService.AddFileAsync(Constants.Azure.Containers.PageAssets, maxid, file.Name, stream);
+                    var fileResult = await this._contactDocService.AddFileAsync(Constants.Azure.Containers.PageContactAssets, maxid, file.Name, stream);
 
                     contactDoc.Link = fileResult.FullPath;
                     contactDoc.Name = fileResult.Name;
@@ -158,7 +158,7 @@ namespace HR.WebApi.Controllers
                     stream.Write(file.Buffer, 0, file.Buffer.Length);
                     ContactDoc contactDoc = new ContactDoc();
                     var maxid = this._contactDocService.GetMaxId();
-                    var fileResult = await this._contactDocService.AddFileAsync(Constants.Azure.Containers.PageAssets, maxid, file.Name, stream);
+                    var fileResult = await this._contactDocService.AddFileAsync(Constants.Azure.Containers.PageContactAssets, maxid, file.Name, stream);
 
                     contactDoc.Link = fileResult.FullPath;
                     contactDoc.Name = fileResult.Name;

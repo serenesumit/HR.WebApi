@@ -101,7 +101,7 @@ namespace HR.WebApi.Repositories.Common
 
             var storageAccount = CloudStorageAccount.Parse(connectionString);
             this._client = storageAccount.CreateCloudBlobClient();
-            CloudBlobContainer cont = this._client.GetContainerReference(Constants.Azure.Containers.PageAssets);
+            CloudBlobContainer cont = this._client.GetContainerReference(containerName);
            // cont.CreateIfNotExists();
             this._isInitialized = true;
         }

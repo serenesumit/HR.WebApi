@@ -245,16 +245,13 @@
     <Compile Include="Mapping\Contact\NoteMap.cs" />
     <Compile Include="Mapping\Employee\EmployeeMap.cs" />
     <Compile Include="Mapping\Employee\EmployeeDocMap.cs" />
+    <Compile Include="Mapping\Employee\EmployeeTypeMap.cs" />
     <Compile Include="Mapping\Event\EventDocMap.cs" />
     <Compile Include="Mapping\Event\EventMap.cs" />
     <Compile Include="Mapping\Event\EventTypeMap.cs" />
-    <Compile Include="Migrations\201811062326427_employee.cs" />
-    <Compile Include="Migrations\201811062326427_employee.Designer.cs">
-      <DependentUpon>201811062326427_employee.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201811100857040_contact-schema-added.cs" />
-    <Compile Include="Migrations\201811100857040_contact-schema-added.Designer.cs">
-      <DependentUpon>201811100857040_contact-schema-added.cs</DependentUpon>
+    <Compile Include="Migrations\201811100954479_initial.cs" />
+    <Compile Include="Migrations\201811100954479_initial.Designer.cs">
+      <DependentUpon>201811100954479_initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Contact\Contact.cs" />
@@ -275,7 +272,6 @@
     <Compile Include="Repositories\Common\ITableStorageRepository.cs" />
     <Compile Include="Repositories\Common\IDbContextRepository.cs" />
     <Compile Include="Repositories\Common\DbContextRepository.cs" />
-<<<<<<< HEAD
     <Compile Include="Repositories\Contact\ContactDocRepository.cs" />
     <Compile Include="Repositories\Contact\ContactRepository.cs" />
     <Compile Include="Repositories\Contact\IContactDocRepository.cs" />
@@ -288,12 +284,10 @@
     <Compile Include="Services\Contact\IContactService.cs" />
     <Compile Include="Services\Contact\INoteService.cs" />
     <Compile Include="Services\Contact\NoteService.cs" />
-=======
     <Compile Include="Repositories\Event\EventDocRepository.cs" />
     <Compile Include="Repositories\Event\EventRepository.cs" />
     <Compile Include="Repositories\Event\IEventDocRepository.cs" />
     <Compile Include="Repositories\Event\IEventRepository.cs" />
->>>>>>> event-branch
     <Compile Include="Services\Employee\EmployeeDocService.cs" />
     <Compile Include="Services\Employee\EmployeeService.cs" />
     <Compile Include="Services\Employee\IEmployeeDocService.cs" />
@@ -390,11 +384,8 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201811062326427_employee.resx">
-      <DependentUpon>201811062326427_employee.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201811100857040_contact-schema-added.resx">
-      <DependentUpon>201811100857040_contact-schema-added.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201811100954479_initial.resx">
+      <DependentUpon>201811100954479_initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

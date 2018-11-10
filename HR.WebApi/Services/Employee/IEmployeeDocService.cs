@@ -15,11 +15,12 @@ namespace HR.WebApi.Services
 
         MethodResult<EmployeeDoc> Update(EmployeeDoc model);
 
-        bool DeleteEmployeeDocument(Guid Id, Guid resumeId);
+        bool DeleteEmployeeDocument(Int32 Id, Int32 resumeId);
 
-        Task<UpFile> AddFileAsync(string containerName, Guid resumeId, string filename, Stream fileStream);
+        Task<UpFile> AddFileAsync(string containerName, Int32 resumeId, string filename, Stream fileStream);
 
         Task<bool> DeleteFileAsync(string path);
-        
+
+        int GetMaxId();
     }
 }

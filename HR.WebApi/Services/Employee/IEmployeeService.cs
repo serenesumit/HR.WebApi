@@ -14,8 +14,8 @@ namespace HR.WebApi
     {
         MethodResult<Employee> Add(Employee model);
         Task<List<Employee>> GetAll();
-        Employee Get(Guid id);
-        Task<Employee> DeleteEmployee(Guid Id);
+        Employee Get(Int32 id);
+        Task<Employee> DeleteEmployee(Int32 Id);
        
     }
 }

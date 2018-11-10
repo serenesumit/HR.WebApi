@@ -47,7 +47,7 @@ namespace HR.WebApi.Services
             return result;
         }
 
-        public bool DeleteEmployeeDocument(Guid Id, Guid resumeId)
+        public bool DeleteEmployeeDocument(Int32 Id, Int32 resumeId)
         {
             var employeeResume = this._upRepository.EmployeeDocs.Where(p => p.Id == resumeId).FirstOrDefault();
             var isFileDeleted = this.DeleteFileAsync(employeeResume.Name);
@@ -61,7 +61,7 @@ namespace HR.WebApi.Services
         {
             try
             {
-                this._fileRepository.Initialize(storageAccount, Constants.Azure.Containers.PageAssets);
+                this._fileRepository.Initialize(storageAccount, Constants.Azure.Containers.PageEmployeeAssets);
                 bool isDeleted = await this._fileRepository.DeleteFileAsync(path);
                 return isDeleted;
             }
@@ -75,11 +75,11 @@ namespace HR.WebApi.Services
        
 
 
-        public virtual async Task<UpFile> AddFileAsync(string containerName, Guid resumeId, string filename, Stream fileStream)
+        public virtual async Task<UpFile> AddFileAsync(string containerName, Int32 resumeId, string filename, Stream fileStream)
         {
             try
             {
-                var path = string.Format(Constants.Azure.BlobPaths.Docs, resumeId.ToString());
+                var path = string.Format(Constants.Azure.BlobPaths.EmployeeResumes, resumeId.ToString());
                 // http://stackoverflow.com/questions/1029740/get-mime-type-from-filename-extension
                 var contentType = MimeMapping.GetMimeMapping(filename);
                 this._fileRepository.Initialize(storageAccount, containerName);
@@ -91,6 +91,13 @@ namespace HR.WebApi.Services
                 return new UpFile();
             }
 
+        }
+
+        public int GetMaxId()
+        {
+            var data = _upRepository.EmployeeDocs.OrderByDescending(u => u.Id).FirstOrDefault();
+            if (data != null) return data.Id;
+            return 0;
         }
     }
 }

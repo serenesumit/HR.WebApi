@@ -89,7 +89,7 @@ namespace HR.WebApi.Repositories
         {
             try
             {
-                this._fileRepository.Initialize(storageAccount, Constants.Azure.Containers.PageAssets);
+                this._fileRepository.Initialize(storageAccount, Constants.Azure.Containers.PageEventAssets);
                 bool isDeleted = await this._fileRepository.DeleteFileAsync(path);
                 return isDeleted;
             }
@@ -105,7 +105,7 @@ namespace HR.WebApi.Repositories
         {
             try
             {
-                var path = string.Format(Constants.Azure.BlobPaths.Docs, docId.ToString());
+                var path = string.Format(Constants.Azure.BlobPaths.EventDocs, docId.ToString());
                 // http://stackoverflow.com/questions/1029740/get-mime-type-from-filename-extension
                 var contentType = MimeMapping.GetMimeMapping(filename);
                 this._fileRepository.Initialize(storageAccount, containerName);

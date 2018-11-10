@@ -2,6 +2,7 @@
 using HR.WebApi.Models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.ModelConfiguration;
 using System.Linq;
 using System.Text;
@@ -16,7 +17,7 @@ namespace Repositories.Mapping
             // Primary Key
             this.HasKey(t => t.Id);
 
-            //// this.Property(t => t.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
+             this.Property(t => t.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
 
             // Properties
             this.Property(t => t.Link).HasMaxLength(2000);
@@ -24,7 +25,7 @@ namespace Repositories.Mapping
             this.Property(t => t.EmployeeId);
 
             // Table & Column Mappings
-            this.ToTable("EmployeeResumes");
+            this.ToTable("EmployeeDocs");
             this.Property(t => t.Id).HasColumnName("Id");
             this.Property(t => t.Name).HasColumnName("Name");
             this.Property(t => t.Link).HasColumnName("Link");

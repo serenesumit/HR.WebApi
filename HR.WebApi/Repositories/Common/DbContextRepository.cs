@@ -33,18 +33,19 @@ namespace HR.WebApi.Repositories.Common
         public IDbSet<Employee> Employees { get; set; }
 
         public IDbSet<EmployeeDoc> EmployeeDocs { get; set; }
-       
+
+        public IDbSet<EmployeeType> EmployeeTypes { get; set; }
+
         public IDbSet<Contact> Contacts { get; set; }
 
-<<<<<<< HEAD
         public IDbSet<ContactDoc> ContactDocs { get; set; }
-=======
+
         public IDbSet<Event> Events { get; set; }
 
         public IDbSet<EventDoc> EventDocs { get; set; }
 
         public IDbSet<EventType> EventTypes { get; set; }
->>>>>>> event-branch
+
 
         public IDbSet<Department> Departments { get; set; }
 
@@ -104,17 +105,17 @@ namespace HR.WebApi.Repositories.Common
             this.Configuration.LazyLoadingEnabled = false;
             modelBuilder.Configurations.Add(new EmployeeMap());
             modelBuilder.Configurations.Add(new EmployeeDocMap());
+            modelBuilder.Configurations.Add(new EmployeeTypeMap());
 
-<<<<<<< HEAD
             modelBuilder.Configurations.Add(new ContactMap());
             modelBuilder.Configurations.Add(new DepartmentMap());
             modelBuilder.Configurations.Add(new ContactDocMap());
 
-=======
+
             modelBuilder.Configurations.Add(new EventMap());
             modelBuilder.Configurations.Add(new EventTypeMap());
             modelBuilder.Configurations.Add(new EventDocMap());
->>>>>>> event-branch
+
         }
     }
 }

@@ -14,7 +14,7 @@ namespace HR.WebApi.Helpers.Model
             this.EmployeeResumes = new List<EmployeeDoc>();
         }
 
-        public Guid? Id { get; set; }
+        public Int32? Id { get; set; }
 
         public string FirstName { get; set; }
 

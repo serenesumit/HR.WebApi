@@ -64,7 +64,7 @@ namespace HR.WebApi.Controllers
                     stream.Write(file.Buffer, 0, file.Buffer.Length);
                     EventDoc eventDoc = new EventDoc();
                     var maxid = this._eventDocService.GetMaxId();
-                    var fileResult = await this._eventDocService.AddFileAsync(Constants.Azure.Containers.PageAssets, maxid, file.Name, stream);
+                    var fileResult = await this._eventDocService.AddFileAsync(Constants.Azure.Containers.PageEventAssets, maxid, file.Name, stream);
 
                     eventDoc.Link = fileResult.FullPath;
                     eventDoc.Name = fileResult.Name;
@@ -161,7 +161,7 @@ namespace HR.WebApi.Controllers
                     stream.Write(file.Buffer, 0, file.Buffer.Length);
                     EventDoc eventDoc = new EventDoc();
                     var maxid = this._eventDocService.GetMaxId();
-                    var fileResult = await this._eventDocService.AddFileAsync(Constants.Azure.Containers.PageAssets, maxid, file.Name, stream);
+                    var fileResult = await this._eventDocService.AddFileAsync(Constants.Azure.Containers.PageEventAssets, maxid, file.Name, stream);
 
                     eventDoc.Link = fileResult.FullPath;
                     eventDoc.Name = fileResult.Name;

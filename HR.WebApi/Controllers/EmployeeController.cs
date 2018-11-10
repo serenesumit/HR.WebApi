@@ -60,14 +60,15 @@ namespace HR.WebApi.Controllers
 
                     stream.Write(file.Buffer, 0, file.Buffer.Length);
                     EmployeeDoc employeeResume = new EmployeeDoc();
-                    employeeResume.Id = Guid.NewGuid();
-                    var fileResult = await this._employeeResumeService.AddFileAsync(Constants.Azure.Containers.PageAssets, employeeResume.Id.Value, file.FileName, stream);
+                    var maxId = this._employeeResumeService.GetMaxId();
+                    var fileResult = await this._employeeResumeService.AddFileAsync(Constants.Azure.Containers.PageEmployeeAssets, maxId, file.FileName, stream);
+
 
                     employeeResume.Link = fileResult.FullPath;
                     employeeResume.Name = fileResult.Name;
-                    employeeResume.EmployeeId = employee.Id.Value;
+                    employeeResume.EmployeeId = employee.Id;
                     this._employeeResumeService.Add(employeeResume);
-                   
+
                 }
 
                 result = Request.CreateResponse(HttpStatusCode.Created, employee);
@@ -104,7 +105,7 @@ namespace HR.WebApi.Controllers
         }
 
         [HttpGet]
-        public Employee GetEmployee(Guid id)
+        public Employee GetEmployee(Int32 id)
         {
             return this._employeeService.Get(id);
         }
@@ -114,7 +115,7 @@ namespace HR.WebApi.Controllers
         {
             HttpResponseMessage result = null;
 
-            if (!model.Id.HasValue)
+            if (model.Id == 0)
             {
                 result = Request.CreateResponse(HttpStatusCode.BadRequest);
             }
@@ -137,12 +138,12 @@ namespace HR.WebApi.Controllers
                     MemoryStream stream = new MemoryStream();
                     stream.Write(file.Buffer, 0, file.Buffer.Length);
                     EmployeeDoc employeeResume = new EmployeeDoc();
-                    employeeResume.Id = Guid.NewGuid();
-                    var fileResult = await this._employeeResumeService.AddFileAsync(Constants.Azure.Containers.PageAssets, employeeResume.Id.Value, file.FileName, stream);
+                    var maxId = this._employeeResumeService.GetMaxId();
+                    var fileResult = await this._employeeResumeService.AddFileAsync(Constants.Azure.Containers.PageEmployeeAssets, maxId, file.FileName, stream);
 
                     employeeResume.Link = fileResult.FullPath;
                     employeeResume.Name = fileResult.Name;
-                    employeeResume.EmployeeId = employee.Id.Value;
+                    employeeResume.EmployeeId = employee.Id;
                     this._employeeResumeService.Add(employeeResume);
                 }
 
@@ -168,7 +169,7 @@ namespace HR.WebApi.Controllers
         }
 
         [HttpDelete]
-        public async Task<HttpResponseMessage> DeleteEmployee(Guid? id)
+        public async Task<HttpResponseMessage> DeleteEmployee(Int32? id)
         {
             HttpResponseMessage result = null;
             if (!id.HasValue)
@@ -181,8 +182,8 @@ namespace HR.WebApi.Controllers
         }
 
         [HttpDelete]
-        [Route("{employeeId:guid}/employee-resume/{resumeId:guid}")]
-        public async Task<HttpResponseMessage> DeleteEmployee(Guid? employeeId, Guid? resumeId)
+        [Route("{employeeId:int}/employee-resume/{resumeId:int}")]
+        public async Task<HttpResponseMessage> DeleteEmployee(Int32? employeeId, Int32? resumeId)
         {
             HttpResponseMessage result = null;
             if (!employeeId.HasValue || !resumeId.HasValue)

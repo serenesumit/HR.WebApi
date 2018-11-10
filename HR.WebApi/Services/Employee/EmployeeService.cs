@@ -29,7 +29,7 @@ namespace HR.WebApi.Services
         {
             this._upRepository = upRepository;
             this._employeeDocService = employeeDocService;
-           
+
         }
 
         public virtual MethodResult<Employee> Add(Employee model)
@@ -37,14 +37,13 @@ namespace HR.WebApi.Services
             var result = new MethodResult<Employee>();
             try
             {
-                if (!model.Id.HasValue)
+                if (model.Id == 0)
                 {
-                    model.Id = Guid.NewGuid();
                     this._upRepository.Employees.Add(model);
                 }
                 else
                 {
-                    Employee employee = this._upRepository.Employees.Where(x => x.Id == model.Id.Value).FirstOrDefault();
+                    Employee employee = this._upRepository.Employees.Where(x => x.Id == model.Id).FirstOrDefault();
                     if (employee != null)
                     {
                         employee.FirstName = model.FirstName;
@@ -69,12 +68,12 @@ namespace HR.WebApi.Services
             return data;
         }
 
-        public Employee Get(Guid id)
+        public Employee Get(Int32 id)
         {
             return this._upRepository.Employees.Include(p => p.EmployeeResumes).Where(p => p.Id == id).FirstOrDefault();
         }
 
-        public async Task<Employee> DeleteEmployee(Guid Id)
+        public async Task<Employee> DeleteEmployee(Int32 Id)
         {
             var employeeResumes = this._upRepository.EmployeeDocs.Where(p => p.EmployeeId == Id).ToList();
             foreach (var resume in employeeResumes)
@@ -99,7 +98,7 @@ namespace HR.WebApi.Services
             return employee;
         }
 
-      
+
 
     }
 }

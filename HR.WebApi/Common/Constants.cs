@@ -13,26 +13,26 @@ namespace HR.WebApi.Common
         {
             public static class Containers
             {
-<<<<<<< HEAD
-                public const string PageAssets = "resumes";
+
+                public const string PageEmployeeAssets = "resumes";
 
                 public const string PageContactAssets = "contacts";
-=======
-                public const string PageAssets = "documents";
->>>>>>> event-branch
+
+                public const string PageEventAssets = "events";
+
             }
 
             public static class BlobPaths
             {
-<<<<<<< HEAD
+
                 // resumes/{resumesId}
                 public const string EmployeeResumes = "resumes/{0}";
 
                 public const string ContactDocs = "contacts/{0}";
-=======
+
                 // documents/{documentid}
-                public const string Docs = "documents/{0}";
->>>>>>> event-branch
+                public const string EventDocs = "events/{0}";
+
             }
 
             public static class ShareAccessPolicies
