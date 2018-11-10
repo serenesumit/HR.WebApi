@@ -24,6 +24,7 @@ namespace HR.WebApi.Repositories.Common
 
         IDbSet<EmployeeDoc> EmployeeDocs { get; set; }
 
+<<<<<<< HEAD
         IDbSet<Contact> Contacts { get; set; }
 
         IDbSet<ContactDoc> ContactDocs { get; set; }
@@ -31,6 +32,13 @@ namespace HR.WebApi.Repositories.Common
         IDbSet<Department> Departments { get; set; }
 
         IDbSet<Note> Notes { get; set; }
+=======
+        IDbSet<Event> Events { get; set; }
+
+        IDbSet<EventDoc> EventDocs { get; set; }
+
+        IDbSet<EventType> EventTypes { get; set; }
+>>>>>>> event-branch
 
         int SaveChanges();
 

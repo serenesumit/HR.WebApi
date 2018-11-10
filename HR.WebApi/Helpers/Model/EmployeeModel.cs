@@ -9,6 +9,11 @@ namespace HR.WebApi.Helpers.Model
 {
     public class EmployeeModel
     {
+        public EmployeeModel()
+        {
+            this.EmployeeResumes = new List<EmployeeDoc>();
+        }
+
         public Guid? Id { get; set; }
 
         public string FirstName { get; set; }

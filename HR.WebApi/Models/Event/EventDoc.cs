@@ -7,7 +7,7 @@ namespace HR.WebApi.Models
 {
     public class EventDoc
     {
-        public Int32? Id { get; set; }
+        public Int32 Id { get; set; }
 
         public string Name { get; set; }
 
@@ -15,6 +15,6 @@ namespace HR.WebApi.Models
 
         public virtual Event Event { get; set; }
 
-        public Guid EventId { get; set; }
+        public Int32? EventId { get; set; }
     }
 }

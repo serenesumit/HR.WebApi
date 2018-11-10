@@ -77,7 +77,7 @@ namespace HR.WebApi.Controllers
 
         }
 
-        public async Task<IEnumerable<Employee>> Get()
+        public async Task<IEnumerable<Employee>> GetEmployees()
         {
             var result = await this._employeeService.GetAll();
             List<Employee> model = new List<Employee>();
@@ -104,7 +104,7 @@ namespace HR.WebApi.Controllers
         }
 
         [HttpGet]
-        public Employee Get(Guid id)
+        public Employee GetEmployee(Guid id)
         {
             return this._employeeService.Get(id);
         }
