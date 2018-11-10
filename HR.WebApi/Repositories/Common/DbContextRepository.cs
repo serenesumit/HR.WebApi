@@ -3,6 +3,7 @@
 namespace HR.WebApi.Repositories.Common
 {
     using global::Repositories.Mapping;
+    using HR.WebApi.Mapping;
     using HR.WebApi.Models;
 
     #region using
@@ -32,8 +33,14 @@ namespace HR.WebApi.Repositories.Common
         public IDbSet<Employee> Employees { get; set; }
 
         public IDbSet<EmployeeDoc> EmployeeDocs { get; set; }
+       
+        public IDbSet<Contact> Contacts { get; set; }
 
+        public IDbSet<ContactDoc> ContactDocs { get; set; }
 
+        public IDbSet<Department> Departments { get; set; }
+
+        public IDbSet<Note> Notes { get; set; }
 
         public DbContext DbContext
         {
@@ -89,6 +96,10 @@ namespace HR.WebApi.Repositories.Common
             this.Configuration.LazyLoadingEnabled = false;
             modelBuilder.Configurations.Add(new EmployeeMap());
             modelBuilder.Configurations.Add(new EmployeeDocMap());
+
+            modelBuilder.Configurations.Add(new ContactMap());
+            modelBuilder.Configurations.Add(new DepartmentMap());
+            modelBuilder.Configurations.Add(new ContactDocMap());
 
         }
     }

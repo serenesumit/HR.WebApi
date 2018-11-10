@@ -24,6 +24,14 @@ namespace HR.WebApi.Repositories.Common
 
         IDbSet<EmployeeDoc> EmployeeDocs { get; set; }
 
+        IDbSet<Contact> Contacts { get; set; }
+
+        IDbSet<ContactDoc> ContactDocs { get; set; }
+
+        IDbSet<Department> Departments { get; set; }
+
+        IDbSet<Note> Notes { get; set; }
+
         int SaveChanges();
 
         Task<int> SaveChangesAsync();

@@ -14,12 +14,16 @@ namespace HR.WebApi.Common
             public static class Containers
             {
                 public const string PageAssets = "resumes";
+
+                public const string PageContactAssets = "contacts";
             }
 
             public static class BlobPaths
             {
                 // resumes/{resumesId}
                 public const string EmployeeResumes = "resumes/{0}";
+
+                public const string ContactDocs = "contacts/{0}";
             }
 
             public static class ShareAccessPolicies

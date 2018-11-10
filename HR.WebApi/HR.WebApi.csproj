@@ -225,21 +225,36 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\EmployeeController.cs" />
+    <Compile Include="Controllers\ContactController.cs" />
+    <Compile Include="Controllers\DepartmentController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\Model\ContactModel.cs" />
     <Compile Include="Helpers\Model\EmployeeModel.cs" />
     <Compile Include="Helpers\Model\MethodResult.cs" />
     <Compile Include="Helpers\Model\UpFile.cs" />
+    <Compile Include="Mapping\Contact\ContactDocMap.cs" />
+    <Compile Include="Mapping\Contact\ContactMap.cs" />
+    <Compile Include="Mapping\Contact\DepartmentMap.cs" />
+    <Compile Include="Mapping\Contact\NoteMap.cs" />
     <Compile Include="Mapping\Employee\EmployeeMap.cs" />
     <Compile Include="Mapping\Employee\EmployeeDocMap.cs" />
     <Compile Include="Migrations\201811062326427_employee.cs" />
     <Compile Include="Migrations\201811062326427_employee.Designer.cs">
       <DependentUpon>201811062326427_employee.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201811100857040_contact-schema-added.cs" />
+    <Compile Include="Migrations\201811100857040_contact-schema-added.Designer.cs">
+      <DependentUpon>201811100857040_contact-schema-added.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Contact\Contact.cs" />
+    <Compile Include="Models\Contact\ContactDoc.cs" />
+    <Compile Include="Models\Contact\Department.cs" />
+    <Compile Include="Models\Contact\Note.cs" />
     <Compile Include="Models\Employee\Employee.cs" />
     <Compile Include="Models\Employee\EmployeeDoc.cs" />
     <Compile Include="Models\Employee\EmployeeType.cs" />
@@ -254,6 +269,18 @@
     <Compile Include="Repositories\Common\ITableStorageRepository.cs" />
     <Compile Include="Repositories\Common\IDbContextRepository.cs" />
     <Compile Include="Repositories\Common\DbContextRepository.cs" />
+    <Compile Include="Repositories\Contact\ContactDocRepository.cs" />
+    <Compile Include="Repositories\Contact\ContactRepository.cs" />
+    <Compile Include="Repositories\Contact\IContactDocRepository.cs" />
+    <Compile Include="Repositories\Contact\IContactRepository.cs" />
+    <Compile Include="Repositories\Contact\INoteRepository.cs" />
+    <Compile Include="Repositories\Contact\NoteRepository.cs" />
+    <Compile Include="Services\Contact\ContactDocService.cs" />
+    <Compile Include="Services\Contact\ContactService.cs" />
+    <Compile Include="Services\Contact\IContactDocService.cs" />
+    <Compile Include="Services\Contact\IContactService.cs" />
+    <Compile Include="Services\Contact\INoteService.cs" />
+    <Compile Include="Services\Contact\NoteService.cs" />
     <Compile Include="Services\Employee\EmployeeDocService.cs" />
     <Compile Include="Services\Employee\EmployeeService.cs" />
     <Compile Include="Services\Employee\IEmployeeDocService.cs" />
@@ -315,7 +342,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Repositories\HR\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -349,6 +375,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201811062326427_employee.resx">
       <DependentUpon>201811062326427_employee.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811100857040_contact-schema-added.resx">
+      <DependentUpon>201811100857040_contact-schema-added.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
