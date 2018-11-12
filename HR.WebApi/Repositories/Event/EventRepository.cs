@@ -27,28 +27,22 @@ namespace HR.WebApi.Repositories
         public MethodResult<Event> Add(Event model)
         {
             var result = new MethodResult<Event>();
-            try
+
+            if (model.Id == 0)
             {
-                if (model.Id == 0)
-                {
-                    this._upRepository.Events.Add(model);
-                }
-                else
-                {
-
-                    var dbevent = this._upRepository.Events.Where(x => x.Id == model.Id).FirstOrDefault();
-                    if (dbevent != null)
-                    {
-                        dbevent.Title = model.Title;
-                    }
-                }
-
-                this._upRepository.SaveChanges();
+                this._upRepository.Events.Add(model);
             }
-            catch (Exception ex)
+            else
             {
 
+                var dbevent = this._upRepository.Events.Where(x => x.Id == model.Id).FirstOrDefault();
+                if (dbevent != null)
+                {
+                    dbevent.Title = model.Title;
+                }
             }
+
+            this._upRepository.SaveChanges();
 
             result.Result = model;
             return result;

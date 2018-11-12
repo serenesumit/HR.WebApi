@@ -28,16 +28,18 @@ namespace HR.WebApi.Repositories
         public Int32 GetMaxId()
         {
             var data = _upRepository.Events.OrderByDescending(u => u.Id).FirstOrDefault();
-            if (data != null) return data.Id;
-            return 0;
+            if (data != null) return data.Id + 1;
+            return 1;
         }
 
         public MethodResult<EventDoc> Add(EventDoc model)
         {
             var result = new MethodResult<EventDoc>();
+
             this._upRepository.EventDocs.Add(model);
             this._upRepository.SaveChanges();
             result.Result = model;
+
             return result;
         }
 

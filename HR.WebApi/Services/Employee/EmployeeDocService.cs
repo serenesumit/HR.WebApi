@@ -31,8 +31,16 @@ namespace HR.WebApi.Services
         public virtual MethodResult<EmployeeDoc> Add(EmployeeDoc model)
         {
             var result = new MethodResult<EmployeeDoc>();
-            this._upRepository.EmployeeDocs.Add(model);
-            this._upRepository.SaveChanges();
+            try
+            {
+                this._upRepository.EmployeeDocs.Add(model);
+                this._upRepository.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+
+            }
+
             result.Result = model;
             return result;
         }
@@ -72,7 +80,7 @@ namespace HR.WebApi.Services
 
         }
 
-       
+
 
 
         public virtual async Task<UpFile> AddFileAsync(string containerName, Int32 resumeId, string filename, Stream fileStream)
@@ -96,8 +104,8 @@ namespace HR.WebApi.Services
         public int GetMaxId()
         {
             var data = _upRepository.EmployeeDocs.OrderByDescending(u => u.Id).FirstOrDefault();
-            if (data != null) return data.Id;
-            return 0;
+            if (data != null) return data.Id + 1;
+            return 1;
         }
     }
 }

@@ -18,13 +18,13 @@ namespace HR.WebApi.Controllers
 {
     [EnableCors(origins: "*", headers: "*", methods: "*")]
     [RoutePrefix("api/departments")]
-    public class DepartmentController : ApiController
+    public class DepartmentsController : ApiController
     {
 
         private readonly IContactService _contactService;
         private readonly IContactDocService _contactDocService;
 
-        public DepartmentController(
+        public DepartmentsController(
             IContactService contactService,
              IContactDocService contactDocService
           )

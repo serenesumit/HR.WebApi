@@ -17,14 +17,14 @@ using System.Web.Http.Cors;
 namespace HR.WebApi.Controllers
 {
     [EnableCors(origins: "*", headers: "*", methods: "*")]
-    [RoutePrefix("api/events")]
-    public class ContactController : ApiController
+    [RoutePrefix("api/contacts")]
+    public class ContactsController : ApiController
     {
 
         private readonly IContactService _contactService;
         private readonly IContactDocService _contactDocService;
 
-        public ContactController(
+        public ContactsController(
             IContactService contactService,
              IContactDocService contactDocService
           )
@@ -63,7 +63,7 @@ namespace HR.WebApi.Controllers
                     stream.Write(file.Buffer, 0, file.Buffer.Length);
                     ContactDoc contactDoc = new ContactDoc();
                     var maxid = this._contactDocService.GetMaxId();
-                    var fileResult = await this._contactDocService.AddFileAsync(Constants.Azure.Containers.PageContactAssets, maxid, file.Name, stream);
+                    var fileResult = await this._contactDocService.AddFileAsync(Constants.Azure.Containers.PageContactAssets, maxid, file.FileName, stream);
 
                     contactDoc.Link = fileResult.FullPath;
                     contactDoc.Name = fileResult.Name;
@@ -71,9 +71,9 @@ namespace HR.WebApi.Controllers
                     this._contactDocService.Add(contactDoc);
 
                 }
-
-                result = Request.CreateResponse(HttpStatusCode.Created, contactModel);
             }
+
+            result = Request.CreateResponse(HttpStatusCode.Created, contactModel);
 
             return result;
 
@@ -96,7 +96,7 @@ namespace HR.WebApi.Controllers
                     contactDoc.Id = dbDoc.Id;
                     contactModel.ContactDocs.Add(contactDoc);
                 }
-
+                contactModel.Id = model.Id;
                 contactModel.Title = model.Title;
                 contactModel.DepartmentId = model.DepartmentId;
                 contactModel.Bio = model.Bio;
@@ -130,7 +130,7 @@ namespace HR.WebApi.Controllers
             {
                 result = Request.CreateResponse(HttpStatusCode.BadRequest);
             }
-
+            Contact returnModel = new Contact();
             Contact contactModel = this._contactService.Get(model.Id);
             if (contactModel == null)
             {
@@ -158,7 +158,7 @@ namespace HR.WebApi.Controllers
                     stream.Write(file.Buffer, 0, file.Buffer.Length);
                     ContactDoc contactDoc = new ContactDoc();
                     var maxid = this._contactDocService.GetMaxId();
-                    var fileResult = await this._contactDocService.AddFileAsync(Constants.Azure.Containers.PageContactAssets, maxid, file.Name, stream);
+                    var fileResult = await this._contactDocService.AddFileAsync(Constants.Azure.Containers.PageContactAssets, maxid, file.FileName, stream);
 
                     contactDoc.Link = fileResult.FullPath;
                     contactDoc.Name = fileResult.Name;
@@ -166,7 +166,7 @@ namespace HR.WebApi.Controllers
                     this._contactDocService.Add(contactDoc);
                 }
 
-                Contact returnModel = new Contact();
+               
                 foreach (var dbDoc in model.ContactDocs)
                 {
                     ContactDoc eventDoc = new ContactDoc();
@@ -176,27 +176,42 @@ namespace HR.WebApi.Controllers
                     eventDoc.Id = dbDoc.Id;
                     returnModel.ContactDocs.Add(eventDoc);
                 }
-
-                returnModel.Title = model.Title;
-
-
-                result = Request.CreateResponse(HttpStatusCode.Created, returnModel);
             }
+
+            returnModel.Title = model.Title;
+            returnModel.DepartmentId = model.DepartmentId;
+            returnModel.Bio = model.Bio;
+            returnModel.Name = model.Name;
+            returnModel.PhoneNumber = model.PhoneNumber;
+            returnModel.MobileNumber = model.MobileNumber;
+            returnModel.EmailAddress = model.EmailAddress;
+            returnModel.QuickFacts = model.QuickFacts;
+            returnModel.Website = model.Website;
+            returnModel.Website = model.Website;
+            returnModel.Id = model.Id;
+            result = Request.CreateResponse(HttpStatusCode.Created, returnModel);
 
             return result;
         }
 
         [HttpDelete]
-        public async Task<HttpResponseMessage> DeleteContact(Int32? eventid = 0)
+        [Route("{contactId:int}")]
+        public async Task<HttpResponseMessage> DeleteContact(Int32? contactId = 0)
         {
             HttpResponseMessage result = null;
-            if (eventid == 0)
+            if (contactId == 0)
             {
                 result = Request.CreateResponse(HttpStatusCode.BadRequest);
             }
 
-            await this._contactDocService.DeleteContactDocumentsByContactId(eventid.Value);
-            await this._contactService.DeleteContact(eventid.Value);
+            Contact contactModel = this._contactService.Get(contactId.Value);
+            if (contactModel == null)
+            {
+                result = Request.CreateResponse(HttpStatusCode.BadRequest);
+            }
+            
+            await this._contactDocService.DeleteContactDocumentsByContactId(contactId.Value);
+            await this._contactService.DeleteContact(contactId.Value);
             return new HttpResponseMessage(HttpStatusCode.OK);
         }
 

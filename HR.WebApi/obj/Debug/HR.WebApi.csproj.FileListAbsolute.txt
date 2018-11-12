@@ -30,7 +30,6 @@ D:\Live Projects\HR.WebApi\HR.WebApi\bin\roslyn\vbc.rsp
 D:\Live Projects\HR.WebApi\HR.WebApi\bin\roslyn\VBCSCompiler.exe
 D:\Live Projects\HR.WebApi\HR.WebApi\bin\roslyn\VBCSCompiler.exe.config
 D:\Live Projects\HR.WebApi\HR.WebApi\bin\Antlr3.Runtime.dll
-D:\Live Projects\HR.WebApi\HR.WebApi\bin\ApiMultiPartFormData.dll
 D:\Live Projects\HR.WebApi\HR.WebApi\bin\EntityFramework.dll
 D:\Live Projects\HR.WebApi\HR.WebApi\bin\EntityFramework.SqlServer.dll
 D:\Live Projects\HR.WebApi\HR.WebApi\bin\Microsoft.AI.Agent.Intercept.dll
@@ -66,8 +65,6 @@ D:\Live Projects\HR.WebApi\HR.WebApi\bin\Unity.AspNet.WebApi.dll
 D:\Live Projects\HR.WebApi\HR.WebApi\bin\Unity.Container.dll
 D:\Live Projects\HR.WebApi\HR.WebApi\bin\WebActivatorEx.dll
 D:\Live Projects\HR.WebApi\HR.WebApi\bin\WebGrease.dll
-D:\Live Projects\HR.WebApi\HR.WebApi\bin\ApiMultiPartFormData.pdb
-D:\Live Projects\HR.WebApi\HR.WebApi\bin\ApiMultiPartFormData.dll.config
 D:\Live Projects\HR.WebApi\HR.WebApi\bin\EntityFramework.xml
 D:\Live Projects\HR.WebApi\HR.WebApi\bin\EntityFramework.SqlServer.xml
 D:\Live Projects\HR.WebApi\HR.WebApi\bin\Microsoft.Azure.KeyVault.Core.xml
@@ -98,3 +95,4 @@ D:\Live Projects\HR.WebApi\HR.WebApi\obj\Debug\HR.WebApi.dll
 D:\Live Projects\HR.WebApi\HR.WebApi\obj\Debug\HR.WebApi.pdb
 D:\Live Projects\HR.WebApi\HR.WebApi\obj\Debug\HR.WebApi.Migrations.initial.resources
 D:\Live Projects\HR.WebApi\HR.WebApi\obj\Debug\HR.WebApi.csproj.GenerateResource.cache
+D:\Live Projects\HR.WebApi\HR.WebApi\obj\Debug\HR.WebApi.csprojAssemblyReference.cache

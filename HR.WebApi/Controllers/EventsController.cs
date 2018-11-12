@@ -18,13 +18,13 @@ namespace HR.WebApi.Controllers
 {
     [EnableCors(origins: "*", headers: "*", methods: "*")]
     [RoutePrefix("api/events")]
-    public class EventController : ApiController
+    public class EventsController : ApiController
     {
 
         private readonly IEventService _eventService;
         private readonly IEventDocService _eventDocService;
 
-        public EventController(
+        public EventsController(
             IEventService eventService,
              IEventDocService eventDocService
           )
@@ -64,7 +64,7 @@ namespace HR.WebApi.Controllers
                     stream.Write(file.Buffer, 0, file.Buffer.Length);
                     EventDoc eventDoc = new EventDoc();
                     var maxid = this._eventDocService.GetMaxId();
-                    var fileResult = await this._eventDocService.AddFileAsync(Constants.Azure.Containers.PageEventAssets, maxid, file.Name, stream);
+                    var fileResult = await this._eventDocService.AddFileAsync(Constants.Azure.Containers.PageEventAssets, maxid, file.FileName, stream);
 
                     eventDoc.Link = fileResult.FullPath;
                     eventDoc.Name = fileResult.Name;
@@ -72,9 +72,10 @@ namespace HR.WebApi.Controllers
                     this._eventDocService.Add(eventDoc);
 
                 }
-
-                result = Request.CreateResponse(HttpStatusCode.Created, eventModel);
+                
             }
+
+            result = Request.CreateResponse(HttpStatusCode.Created, eventModel);
 
             return result;
 
@@ -109,7 +110,7 @@ namespace HR.WebApi.Controllers
                 eventModel.Website = model.Website;
                 eventModel.Schedule = model.Schedule;
                 eventModel.Agenda = model.Agenda;
-
+                eventModel.Id = model.Id;
                 eventmodelList.Add(eventModel);
             }
 
@@ -161,7 +162,7 @@ namespace HR.WebApi.Controllers
                     stream.Write(file.Buffer, 0, file.Buffer.Length);
                     EventDoc eventDoc = new EventDoc();
                     var maxid = this._eventDocService.GetMaxId();
-                    var fileResult = await this._eventDocService.AddFileAsync(Constants.Azure.Containers.PageEventAssets, maxid, file.Name, stream);
+                    var fileResult = await this._eventDocService.AddFileAsync(Constants.Azure.Containers.PageEventAssets, maxid, file.FileName, stream);
 
                     eventDoc.Link = fileResult.FullPath;
                     eventDoc.Name = fileResult.Name;
@@ -191,6 +192,7 @@ namespace HR.WebApi.Controllers
                 returnModel.Website = model.Website;
                 returnModel.Schedule = model.Schedule;
                 returnModel.Agenda = model.Agenda;
+                returnModel.Id = model.Id;
 
                 result = Request.CreateResponse(HttpStatusCode.Created, returnModel);
             }
@@ -199,12 +201,19 @@ namespace HR.WebApi.Controllers
         }
 
         [HttpDelete]
+        [Route("{eventid:int}")]
         public async Task<HttpResponseMessage> DeleteEvent(Int32? eventid = 0)
         {
             HttpResponseMessage result = null;
             if (eventid == 0)
             {
                 result = Request.CreateResponse(HttpStatusCode.BadRequest);
+            }
+
+            Event eventModel = this._eventService.Get(eventid.Value);
+            if (eventModel == null)
+            {
+                result = Request.CreateResponse(HttpStatusCode.NotFound);
             }
 
             await this._eventDocService.DeleteEventDocumentsByEventId(eventid.Value);
@@ -220,6 +229,12 @@ namespace HR.WebApi.Controllers
             if (eventId == 0 || eventdocId == 0)
             {
                 result = Request.CreateResponse(HttpStatusCode.BadRequest);
+            }
+
+            Event eventModel = this._eventService.Get(eventId);
+            if (eventModel == null)
+            {
+                result = Request.CreateResponse(HttpStatusCode.NotFound);
             }
 
             this._eventDocService.DeleteEventDocument(eventId, eventdocId.Value);

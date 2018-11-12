@@ -1,4 +1,4 @@
-﻿using ApiMultiPartFormData.Models;
+﻿using MultipartDataMediaFormatter.Infrastructure;
 using HR.WebApi.Models;
 using System;
 using System.Collections.Generic;
@@ -16,7 +16,7 @@ namespace HR.WebApi.Helpers.Model
 
         public Int32 Id { get; set; }
 
-        public Int32? EventTypeId { get; set; }
+        public Int32 EventTypeId { get; set; }
 
         public string Title { get; set; }
 

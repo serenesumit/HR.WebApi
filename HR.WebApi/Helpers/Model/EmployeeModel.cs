@@ -18,6 +18,8 @@ namespace HR.WebApi.Helpers.Model
 
         public string FirstName { get; set; }
 
+        public Int32 EmployeeTypeId { get; set; }
+
         public string LastName { get; set; }
 
         public List<HttpFile> Files { get; set; }

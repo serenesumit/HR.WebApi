@@ -28,8 +28,16 @@ namespace HR.WebApi.Repositories
         public MethodResult<ContactDoc> Add(ContactDoc model)
         {
             var result = new MethodResult<ContactDoc>();
-            this._upRepository.ContactDocs.Add(model);
-            this._upRepository.SaveChanges();
+            try
+            {
+                this._upRepository.ContactDocs.Add(model);
+                this._upRepository.SaveChanges();
+            }
+            catch(Exception ex)
+            {
+
+            }
+            
             result.Result = model;
             return result;
         }
@@ -99,8 +107,8 @@ namespace HR.WebApi.Repositories
         public int GetMaxId()
         {
             var data = _upRepository.ContactDocs.OrderByDescending(u => u.Id).FirstOrDefault();
-            if (data != null) return data.Id;
-            return 0;
+            if (data != null) return data.Id +1;
+            return 1;
         }
 
         public MethodResult<ContactDoc> Update(ContactDoc model)

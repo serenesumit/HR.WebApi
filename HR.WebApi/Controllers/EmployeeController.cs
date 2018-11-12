@@ -48,6 +48,7 @@ namespace HR.WebApi.Controllers
             Employee employee = new Employee();
             employee.FirstName = model.FirstName;
             employee.LastName = model.LastName;
+            employee.EmployeeTypeId = model.EmployeeTypeId;
             this._employeeService.Add(employee);
 
             if (model.Files != null && model.Files.Count > 0)
@@ -129,7 +130,7 @@ namespace HR.WebApi.Controllers
             employee.FirstName = model.FirstName;
             employee.LastName = model.LastName;
             this._employeeService.Add(employee);
-
+            Employee employeeModel = new Employee();
             if (model.Files != null && model.Files.Count > 0)
             {
 
@@ -147,7 +148,7 @@ namespace HR.WebApi.Controllers
                     this._employeeResumeService.Add(employeeResume);
                 }
 
-                Employee employeeModel = new Employee();
+               
                 foreach (var resume in employee.EmployeeResumes)
                 {
                     EmployeeDoc employeeResume = new EmployeeDoc();
@@ -157,14 +158,12 @@ namespace HR.WebApi.Controllers
                     employeeResume.Id = resume.Id;
                     employeeModel.EmployeeResumes.Add(employeeResume);
                 }
-
-                employeeModel.FirstName = employee.FirstName;
-                employeeModel.LastName = employee.LastName;
-                employeeModel.Id = employee.Id;
-
-                result = Request.CreateResponse(HttpStatusCode.Created, employeeModel);
             }
 
+            employeeModel.FirstName = employee.FirstName;
+            employeeModel.LastName = employee.LastName;
+            employeeModel.Id = employee.Id;
+            result = Request.CreateResponse(HttpStatusCode.Created, employeeModel);
             return result;
         }
 
