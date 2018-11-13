@@ -174,16 +174,17 @@ namespace HR.WebApi.Controllers
         }
 
         [HttpPut]
-        public async Task<HttpResponseMessage> PutContact(ContactModel model)
+        [Route("{contactId:int}")]
+        public async Task<HttpResponseMessage> PutContact(Int32 contactId,ContactModel model)
         {
             HttpResponseMessage result = null;
 
-            if (model.Id == 0)
+            if (contactId == 0)
             {
                 return Request.CreateResponse(HttpStatusCode.BadRequest);
             }
             Contact returnModel = new Contact();
-            Contact contactModel = this._contactService.Get(model.Id);
+            Contact contactModel = this._contactService.Get(contactId);
             if (contactModel == null)
             {
                 return Request.CreateResponse(HttpStatusCode.NotFound);

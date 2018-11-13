@@ -125,16 +125,17 @@ namespace HR.WebApi.Controllers
         }
 
         [HttpPut]
-        public async Task<HttpResponseMessage> PutEvent(EventModel model)
+        [Route("{eventId:int}")]
+        public async Task<HttpResponseMessage> PutEvent(Int32 eventId, EventModel model)
         {
             HttpResponseMessage result = null;
 
-            if (model.Id == 0)
+            if (eventId == 0)
             {
                 return Request.CreateResponse(HttpStatusCode.BadRequest);
             }
 
-            Event eventModel = this._eventService.Get(model.Id);
+            Event eventModel = this._eventService.Get(eventId);
             if (eventModel == null)
             {
                 return Request.CreateResponse(HttpStatusCode.NotFound);
