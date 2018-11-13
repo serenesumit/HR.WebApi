@@ -70,12 +70,14 @@ namespace HR.WebApi.Controllers
                     eventDoc.Name = fileResult.Name;
                     eventDoc.EventId = eventModel.Id;
                     this._eventDocService.Add(eventDoc);
+                    eventModel.EventDocs.Add(eventDoc);
 
                 }
-                
+
             }
 
-            result = Request.CreateResponse(HttpStatusCode.Created, eventModel);
+
+            result = Request.CreateResponse(HttpStatusCode.Created, GetEventModel(eventModel));
 
             return result;
 
@@ -121,7 +123,38 @@ namespace HR.WebApi.Controllers
         [Route("{eventId:int}")]
         public Event GetEvent(Int32 eventId)
         {
-            return this._eventService.Get(eventId);
+            var model = this._eventService.Get(eventId);
+            if (model == null)
+            {
+                return null;
+            }
+
+            Event eventModel = new Event();
+            foreach (var dbDoc in model.EventDocs)
+            {
+                EventDoc eventDoc = new EventDoc();
+                eventDoc.EventId = dbDoc.EventId;
+                eventDoc.Name = dbDoc.Name;
+                eventDoc.Link = dbDoc.Link;
+                eventDoc.Id = dbDoc.Id;
+                eventModel.EventDocs.Add(eventDoc);
+            }
+
+            eventModel.Title = model.Title;
+            eventModel.EventTypeId = model.EventTypeId;
+            eventModel.Location = model.Location;
+            eventModel.City = model.City;
+            eventModel.State = model.State;
+            eventModel.Zip = model.Zip;
+            eventModel.StartDate = model.StartDate;
+            eventModel.EndDate = model.EndDate;
+            eventModel.Website = model.Website;
+            eventModel.Schedule = model.Schedule;
+            eventModel.Agenda = model.Agenda;
+            eventModel.Id = model.Id;
+
+            return eventModel;
+
         }
 
         [HttpPut]
@@ -154,6 +187,7 @@ namespace HR.WebApi.Controllers
             eventModel.Agenda = model.Agenda;
             this._eventService.Add(eventModel);
 
+            Event returnModel = new Event();
             if (model.Files != null && model.Files.Count > 0)
             {
 
@@ -169,19 +203,10 @@ namespace HR.WebApi.Controllers
                     eventDoc.Name = fileResult.Name;
                     eventDoc.EventId = eventModel.Id;
                     this._eventDocService.Add(eventDoc);
-                }
-
-                Event returnModel = new Event();
-                foreach (var dbDoc in model.EventDocs)
-                {
-                    EventDoc eventDoc = new EventDoc();
-                    eventDoc.EventId = dbDoc.EventId;
-                    eventDoc.Name = dbDoc.Name;
-                    eventDoc.Link = dbDoc.Link;
-                    eventDoc.Id = dbDoc.Id;
                     returnModel.EventDocs.Add(eventDoc);
                 }
 
+             
                 returnModel.Title = model.Title;
                 returnModel.EventTypeId = model.EventTypeId;
                 returnModel.Location = model.Location;
@@ -208,13 +233,13 @@ namespace HR.WebApi.Controllers
             HttpResponseMessage result = null;
             if (eventid == 0)
             {
-               return Request.CreateResponse(HttpStatusCode.BadRequest);
+                return Request.CreateResponse(HttpStatusCode.BadRequest);
             }
 
             Event eventModel = this._eventService.Get(eventid.Value);
             if (eventModel == null)
             {
-              return Request.CreateResponse(HttpStatusCode.NotFound);
+                return Request.CreateResponse(HttpStatusCode.NotFound);
             }
 
             await this._eventDocService.DeleteEventDocumentsByEventId(eventid.Value);
@@ -229,18 +254,47 @@ namespace HR.WebApi.Controllers
             HttpResponseMessage result = null;
             if (eventId == 0 || eventdocId == 0)
             {
-               return Request.CreateResponse(HttpStatusCode.BadRequest);
+                return Request.CreateResponse(HttpStatusCode.BadRequest);
             }
 
             Event eventModel = this._eventService.Get(eventId);
             if (eventModel == null)
             {
-               return Request.CreateResponse(HttpStatusCode.NotFound);
+                return Request.CreateResponse(HttpStatusCode.NotFound);
             }
 
             this._eventDocService.DeleteEventDocument(eventId, eventdocId.Value);
             return new HttpResponseMessage(HttpStatusCode.OK);
         }
 
+
+        private Event GetEventModel(Event model)
+        {
+            Event returnModel = new Event();
+            foreach (var dbDoc in model.EventDocs)
+            {
+                EventDoc eventDoc = new EventDoc();
+                eventDoc.EventId = dbDoc.EventId;
+                eventDoc.Name = dbDoc.Name;
+                eventDoc.Link = dbDoc.Link;
+                eventDoc.Id = dbDoc.Id;
+                returnModel.EventDocs.Add(eventDoc);
+            }
+
+            returnModel.Title = model.Title;
+            returnModel.EventTypeId = model.EventTypeId;
+            returnModel.Location = model.Location;
+            returnModel.City = model.City;
+            returnModel.State = model.State;
+            returnModel.Zip = model.Zip;
+            returnModel.StartDate = model.StartDate;
+            returnModel.EndDate = model.EndDate;
+            returnModel.Website = model.Website;
+            returnModel.Schedule = model.Schedule;
+            returnModel.Agenda = model.Agenda;
+            returnModel.Id = model.Id;
+
+            return returnModel;
+        }
     }
 }

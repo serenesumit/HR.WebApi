@@ -59,7 +59,7 @@ namespace HR.WebApi.Controllers
                     eventDoc.Id = dbDoc.Id;
                     eventModel.EventDocs.Add(eventDoc);
                 }
-
+                eventModel.Id = model.Id;
                 eventModel.Title = model.Title;
                 eventModel.EventTypeId = model.EventTypeId;
                 eventModel.Location = model.Location;

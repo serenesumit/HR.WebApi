@@ -27,7 +27,7 @@ namespace HR.WebApi.Repositories
 
         public Int32 GetMaxId()
         {
-            var data = _upRepository.Events.OrderByDescending(u => u.Id).FirstOrDefault();
+            var data = _upRepository.EventDocs.OrderByDescending(u => u.Id).FirstOrDefault();
             if (data != null) return data.Id + 1;
             return 1;
         }

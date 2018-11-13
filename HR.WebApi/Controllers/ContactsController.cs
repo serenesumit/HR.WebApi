@@ -63,6 +63,7 @@ namespace HR.WebApi.Controllers
                 dbNote.Title = note.Title;
                 dbNote.Desc = note.Desc;
                 this._noteService.Add(dbNote);
+                contactModel.Notes.Add(dbNote);
             }
 
             if (model.Files != null && model.Files.Count > 0)
@@ -81,11 +82,12 @@ namespace HR.WebApi.Controllers
                     contactDoc.Name = fileResult.Name;
                     contactDoc.ContactId = contactModel.Id;
                     this._contactDocService.Add(contactDoc);
+                    contactModel.ContactDocs.Add(contactDoc);
 
                 }
             }
 
-            result = Request.CreateResponse(HttpStatusCode.Created, contactModel);
+            result = Request.CreateResponse(HttpStatusCode.Created, GetContactModel(contactModel));
 
             return result;
 
@@ -170,12 +172,47 @@ namespace HR.WebApi.Controllers
         [Route("{contactId:int}")]
         public Contact GetContact(Int32 contactId)
         {
-            return this._contactService.Get(contactId);
+            var model = this._contactService.Get(contactId);
+            Contact contactModel = new Contact();
+            contactModel.Title = model.Title;
+            contactModel.DepartmentId = model.DepartmentId;
+            contactModel.Bio = model.Bio;
+            contactModel.Name = model.Name;
+            contactModel.PhoneNumber = model.PhoneNumber;
+            contactModel.MobileNumber = model.MobileNumber;
+            contactModel.EmailAddress = model.EmailAddress;
+            contactModel.QuickFacts = model.QuickFacts;
+            contactModel.Website = model.Website;
+            contactModel.Website = model.Website;
+            contactModel.Id = model.Id;
+
+            foreach (var dbDoc in model.ContactDocs)
+            {
+                ContactDoc eventDoc = new ContactDoc();
+                eventDoc.ContactId = dbDoc.ContactId;
+                eventDoc.Name = dbDoc.Name;
+                eventDoc.Link = dbDoc.Link;
+                eventDoc.Id = dbDoc.Id;
+                contactModel.ContactDocs.Add(eventDoc);
+            }
+
+            foreach (var dbNote in model.Notes)
+            {
+                Note note = new Note();
+                note.ContactId = dbNote.ContactId;
+                note.Title = dbNote.Title;
+                note.Desc = dbNote.Desc;
+                note.Id = dbNote.Id;
+                contactModel.Notes.Add(note);
+            }
+
+
+            return contactModel;
         }
 
         [HttpPut]
         [Route("{contactId:int}")]
-        public async Task<HttpResponseMessage> PutContact(Int32 contactId,ContactModel model)
+        public async Task<HttpResponseMessage> PutContact(Int32 contactId, ContactModel model)
         {
             HttpResponseMessage result = null;
 
@@ -219,18 +256,10 @@ namespace HR.WebApi.Controllers
                     contactDoc.Name = fileResult.Name;
                     contactDoc.ContactId = contactModel.Id;
                     this._contactDocService.Add(contactDoc);
+                    returnModel.ContactDocs.Add(contactDoc);
                 }
 
 
-                foreach (var dbDoc in model.ContactDocs)
-                {
-                    ContactDoc eventDoc = new ContactDoc();
-                    eventDoc.ContactId = dbDoc.ContactId;
-                    eventDoc.Name = dbDoc.Name;
-                    eventDoc.Link = dbDoc.Link;
-                    eventDoc.Id = dbDoc.Id;
-                    returnModel.ContactDocs.Add(eventDoc);
-                }
             }
 
             foreach (var dbNote in model.Notes)
@@ -241,6 +270,7 @@ namespace HR.WebApi.Controllers
                 note.Desc = dbNote.Desc;
                 note.Id = dbNote.Id;
                 contactModel.Notes.Add(note);
+                returnModel.Notes.Add(note);
             }
 
             returnModel.Title = model.Title;
@@ -339,6 +369,44 @@ namespace HR.WebApi.Controllers
 
             this._contactDocService.DeleteContactDocument(contactId, contactdocId.Value);
             return new HttpResponseMessage(HttpStatusCode.OK);
+        }
+
+        private Contact GetContactModel(Contact model)
+        {
+            Contact returnModel = new Contact();
+            foreach (var dbNote in model.Notes)
+            {
+                Note note = new Note();
+                note.ContactId = dbNote.ContactId;
+                note.Title = dbNote.Title;
+                note.Desc = dbNote.Desc;
+                note.Id = dbNote.Id;
+                returnModel.Notes.Add(note);
+            }
+
+            foreach (var dbDoc in model.ContactDocs)
+            {
+                ContactDoc eventDoc = new ContactDoc();
+                eventDoc.ContactId = dbDoc.ContactId;
+                eventDoc.Name = dbDoc.Name;
+                eventDoc.Link = dbDoc.Link;
+                eventDoc.Id = dbDoc.Id;
+                returnModel.ContactDocs.Add(eventDoc);
+            }
+
+            returnModel.Title = model.Title;
+            returnModel.DepartmentId = model.DepartmentId;
+            returnModel.Bio = model.Bio;
+            returnModel.Name = model.Name;
+            returnModel.PhoneNumber = model.PhoneNumber;
+            returnModel.MobileNumber = model.MobileNumber;
+            returnModel.EmailAddress = model.EmailAddress;
+            returnModel.QuickFacts = model.QuickFacts;
+            returnModel.Website = model.Website;
+            returnModel.Website = model.Website;
+            returnModel.Id = model.Id;
+
+            return returnModel;
         }
 
     }

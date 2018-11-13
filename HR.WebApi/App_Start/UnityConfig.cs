@@ -53,6 +53,8 @@ namespace HR.WebApi
             container.RegisterType<IEventDocService, EventDocService>();
             container.RegisterType<IEventService, EventService>();
 
+            container.RegisterType<IEmployeeRepository, EmployeeRepository>();
+            container.RegisterType<IEmployeeDocRepository, EmployeeDocRepository>();
             container.RegisterType<IEmployeeService, EmployeeService>();
             container.RegisterType<IEmployeeDocService, EmployeeDocService>();
 

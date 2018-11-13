@@ -70,6 +70,7 @@ namespace HR.WebApi.Controllers
                     contactModel.Notes.Add(note);
                 }
 
+                contactModel.Id = model.Id;
                 contactModel.Title = model.Title;
                 contactModel.DepartmentId = model.DepartmentId;
                 contactModel.Bio = model.Bio;
