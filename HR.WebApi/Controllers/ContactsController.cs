@@ -151,20 +151,20 @@ namespace HR.WebApi.Controllers
             return contactmodelList;
         }
 
-        [HttpPost]
-        public async Task<HttpResponseMessage> PostNote(Note model)
-        {
-            HttpResponseMessage result = null;
-            Note noteModel = new Note();
-            noteModel.Title = model.Title;
-            noteModel.Desc = model.Desc;
-            noteModel.ContactId = model.ContactId;
-            this._noteService.Add(noteModel);
+        //[HttpPost]
+        //public async Task<HttpResponseMessage> PostNote(Note model)
+        //{
+        //    HttpResponseMessage result = null;
+        //    Note noteModel = new Note();
+        //    noteModel.Title = model.Title;
+        //    noteModel.Desc = model.Desc;
+        //    noteModel.ContactId = model.ContactId;
+        //    this._noteService.Add(noteModel);
 
-            result = Request.CreateResponse(HttpStatusCode.Created, noteModel);
+        //    result = Request.CreateResponse(HttpStatusCode.Created, noteModel);
 
-            return result;
-        }
+        //    return result;
+        //}
 
         [HttpGet]
         [Route("{contactId:int}")]
@@ -259,7 +259,8 @@ namespace HR.WebApi.Controllers
         }
 
         [HttpPut]
-        public async Task<HttpResponseMessage> PutNote(Note model)
+        [Route("{contactId:int}/notes/{noteId}")]
+        public async Task<HttpResponseMessage> PutNote(Int32 contactId, Int32 noteId, Note model)
         {
             HttpResponseMessage result = null;
 
@@ -271,7 +272,7 @@ namespace HR.WebApi.Controllers
             Note noteModel = this._noteService.Get(model.Id);
             if (noteModel == null)
             {
-               return Request.CreateResponse(HttpStatusCode.NotFound);
+                return Request.CreateResponse(HttpStatusCode.NotFound);
             }
 
             noteModel.Title = model.Title;
@@ -291,13 +292,13 @@ namespace HR.WebApi.Controllers
             HttpResponseMessage result = null;
             if (contactId == 0)
             {
-               return Request.CreateResponse(HttpStatusCode.BadRequest);
+                return Request.CreateResponse(HttpStatusCode.BadRequest);
             }
 
             Contact contactModel = this._contactService.Get(contactId.Value);
             if (contactModel == null)
             {
-              return Request.CreateResponse(HttpStatusCode.BadRequest);
+                return Request.CreateResponse(HttpStatusCode.BadRequest);
             }
 
             await this._contactDocService.DeleteContactDocumentsByContactId(contactId.Value);
@@ -312,13 +313,13 @@ namespace HR.WebApi.Controllers
             HttpResponseMessage result = null;
             if (noteId == 0)
             {
-               return Request.CreateResponse(HttpStatusCode.BadRequest);
+                return Request.CreateResponse(HttpStatusCode.BadRequest);
             }
 
             Note note = this._noteService.Get(noteId);
             if (note == null)
             {
-               return Request.CreateResponse(HttpStatusCode.NotFound);
+                return Request.CreateResponse(HttpStatusCode.NotFound);
             }
 
             await this._noteService.DeleteNote(noteId);
