@@ -112,16 +112,17 @@ namespace HR.WebApi.Controllers
         }
 
         [HttpPut]
-        public async Task<HttpResponseMessage> PutEmployee(EmployeeModel model)
+        [Route("{employeeId:int}")]
+        public async Task<HttpResponseMessage> PutEmployee(Int32 employeeId, EmployeeModel model)
         {
             HttpResponseMessage result = null;
 
-            if (model.Id == 0)
+            if (employeeId == 0)
             {
               return Request.CreateResponse(HttpStatusCode.BadRequest);
             }
 
-            Employee employee = this._employeeService.Get(model.Id.Value);
+            Employee employee = this._employeeService.Get(employeeId);
             if (employee == null)
             {
               return Request.CreateResponse(HttpStatusCode.NotFound);
