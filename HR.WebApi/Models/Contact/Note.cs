@@ -12,5 +12,9 @@ namespace HR.WebApi.Models
         public string Title { get; set; }
 
         public string Desc { get; set; }
+
+        public Int32 ContactId { get; set; }
+
+        public virtual Contact Contact { get; set; }
     }
 }

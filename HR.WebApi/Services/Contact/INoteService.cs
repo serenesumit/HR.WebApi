@@ -13,5 +13,7 @@ namespace HR.WebApi.Services
         MethodResult<Note> Add(Note model);
         Note Get(Int32 id);
         Task<Note> DeleteNote(Int32 Id);
+
+        Task<List<Note>> GetAll(Int32 contactId);
     }
 }

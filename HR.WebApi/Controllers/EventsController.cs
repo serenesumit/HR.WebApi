@@ -137,7 +137,7 @@ namespace HR.WebApi.Controllers
             Event eventModel = this._eventService.Get(model.Id);
             if (eventModel == null)
             {
-                result = Request.CreateResponse(HttpStatusCode.BadRequest);
+                result = Request.CreateResponse(HttpStatusCode.NotFound);
             }
 
             eventModel.Title = model.Title;
@@ -194,7 +194,7 @@ namespace HR.WebApi.Controllers
                 returnModel.Agenda = model.Agenda;
                 returnModel.Id = model.Id;
 
-                result = Request.CreateResponse(HttpStatusCode.Created, returnModel);
+                result = Request.CreateResponse(HttpStatusCode.OK, returnModel);
             }
 
             return result;

@@ -14,92 +14,41 @@ using HR.WebApi.Repositories.Common;
 using HR.WebApi.Helpers.Model;
 using HR.WebApi.Models;
 using HR.WebApi.Common;
+using HR.WebApi.Repositories;
 
 namespace HR.WebApi.Services
 {
     public class EmployeeService : IEmployeeService
     {
-        private readonly IDbContextRepository _upRepository;
-        private readonly IEmployeeDocService _employeeDocService;
+        private readonly IEmployeeRepository _employeeRepository;
+       
 
-
-        public EmployeeService(IDbContextRepository upRepository,
-            IEmployeeDocService employeeDocService
+        public EmployeeService(IEmployeeRepository employeeRepository
             )
         {
-            this._upRepository = upRepository;
-            this._employeeDocService = employeeDocService;
-
+            this._employeeRepository = employeeRepository;
+        
         }
 
         public virtual MethodResult<Employee> Add(Employee model)
         {
-            var result = new MethodResult<Employee>();
-            try
-            {
-                if (model.Id == 0)
-                {
-                    this._upRepository.Employees.Add(model);
-                }
-                else
-                {
-                    Employee employee = this._upRepository.Employees.Where(x => x.Id == model.Id).FirstOrDefault();
-                    if (employee != null)
-                    {
-                        employee.FirstName = model.FirstName;
-                        employee.LastName = model.LastName;
-                    }
-                }
-
-                this._upRepository.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-
-            }
-
-            result.Result = model;
-            return result;
+            return this._employeeRepository.Add(model);
         }
 
         public async Task<List<Employee>> GetAll()
         {
-            var data = this._upRepository.Employees.Include(p => p.EmployeeResumes).ToList();
-            return data;
+            return await this._employeeRepository.GetAll();
         }
 
         public Employee Get(Int32 id)
         {
-            return this._upRepository.Employees.Include(p => p.EmployeeResumes).Where(p => p.Id == id).FirstOrDefault();
+            return this._employeeRepository.Get(id);
         }
 
         public async Task<Employee> DeleteEmployee(Int32 Id)
         {
-            var employeeResumes = this._upRepository.EmployeeDocs.Where(p => p.EmployeeId == Id).ToList();
-            foreach (var resume in employeeResumes)
-            {
-                try
-                {
-                    var isFileDeleted = await this._employeeDocService.DeleteFileAsync(resume.Name);
-                    if (isFileDeleted)
-                    {
-                        this._upRepository.EmployeeDocs.Remove(resume);
-                    }
-                }
-                catch (Exception ex)
-                {
-
-                }
-            }
-
-            var employee = this._upRepository.Employees.Where(p => p.Id == Id).FirstOrDefault();
-            this._upRepository.Employees.Remove(employee);
-            this._upRepository.SaveChanges();
-            return employee;
+            return await this._employeeRepository.DeleteEmployee(Id);
         }
-
-
-
     }
 }
 

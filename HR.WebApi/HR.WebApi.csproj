@@ -221,7 +221,7 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
-    <Compile Include="Controllers\EventTypesController.cs" />
+    <Compile Include="Controllers\EventTypeController.cs" />
     <Compile Include="Controllers\EventsController.cs" />
     <Compile Include="Controllers\EmployeeController.cs" />
     <Compile Include="Controllers\ContactsController.cs" />
@@ -250,6 +250,10 @@
     <Compile Include="Migrations\201811100954479_initial.Designer.cs">
       <DependentUpon>201811100954479_initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201811122134072_updateNotestable.cs" />
+    <Compile Include="Migrations\201811122134072_updateNotestable.Designer.cs">
+      <DependentUpon>201811122134072_updateNotestable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Contact\Contact.cs" />
     <Compile Include="Models\Contact\ContactDoc.cs" />
@@ -275,6 +279,10 @@
     <Compile Include="Repositories\Contact\IContactRepository.cs" />
     <Compile Include="Repositories\Contact\INoteRepository.cs" />
     <Compile Include="Repositories\Contact\NoteRepository.cs" />
+    <Compile Include="Repositories\Employee\EmployeeDocRepository.cs" />
+    <Compile Include="Repositories\Employee\EmployeeRepository.cs" />
+    <Compile Include="Repositories\Employee\IEmployeeDocRepository.cs" />
+    <Compile Include="Repositories\Employee\IEmployeeRepository.cs" />
     <Compile Include="Services\Contact\ContactDocService.cs" />
     <Compile Include="Services\Contact\ContactService.cs" />
     <Compile Include="Services\Contact\IContactDocService.cs" />
@@ -383,6 +391,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201811100954479_initial.resx">
       <DependentUpon>201811100954479_initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811122134072_updateNotestable.resx">
+      <DependentUpon>201811122134072_updateNotestable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

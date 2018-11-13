@@ -33,5 +33,10 @@ namespace HR.WebApi.Services
         {
             throw new NotImplementedException();
         }
+
+        public Task<List<Note>> GetAll(Int32 contactId)
+        {
+            return this._noteRepository.GetAll(contactId);
+        }
     }
 }

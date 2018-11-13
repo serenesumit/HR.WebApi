@@ -60,6 +60,16 @@ namespace HR.WebApi.Controllers
                     contactModel.ContactDocs.Add(contactDoc);
                 }
 
+                foreach (var dbNote in model.Notes)
+                {
+                    Note note = new Note();
+                    note.ContactId = dbNote.ContactId;
+                    note.Title = dbNote.Title;
+                    note.Desc = dbNote.Desc;
+                    note.Id = dbNote.Id;
+                    contactModel.Notes.Add(note);
+                }
+
                 contactModel.Title = model.Title;
                 contactModel.DepartmentId = model.DepartmentId;
                 contactModel.Bio = model.Bio;

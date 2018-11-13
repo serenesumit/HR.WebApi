@@ -20,12 +20,14 @@ namespace HR.WebApi.Mapping
             // Properties
             this.Property(t => t.Title).HasMaxLength(200);
             this.Property(t => t.Desc).HasMaxLength(200);
+            this.Property(t => t.ContactId);
 
             // Table & Column Mappings
             this.ToTable("Notes");
             this.Property(t => t.Id).HasColumnName("Id");
             this.Property(t => t.Title).HasColumnName("Title");
             this.Property(t => t.Desc).HasColumnName("Desc");
+            this.Property(t => t.ContactId).HasColumnName("ContactId");
         }
     }
 }

@@ -8,12 +8,11 @@ using System.Threading.Tasks;
 
 namespace HR.WebApi.Repositories
 {
-   public interface INoteRepository
+    public interface IEmployeeRepository
     {
-        MethodResult<Note> Add(Note model);
-        Note Get(Int32 id);
-        Task<Note> DeleteNote(Int32 Id);
-
-        Task<List<Note>> GetAll(Int32 contactId);
+        MethodResult<Employee> Add(Employee model);
+        Task<List<Employee>> GetAll();
+        Employee Get(Int32 id);
+        Task<Employee> DeleteEmployee(Int32 Id);
     }
 }

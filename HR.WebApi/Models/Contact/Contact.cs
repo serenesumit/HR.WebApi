@@ -10,6 +10,7 @@ namespace HR.WebApi.Models
         public Contact()
         {
             this.ContactDocs = new List<ContactDoc>();
+            this.Notes = new List<Note>();
         }
 
 
@@ -33,12 +34,10 @@ namespace HR.WebApi.Models
 
         public string Website { get; set; }
 
-        public Int32? NoteId { get; set; }
-
         public virtual Department Department { get; set; }
 
-        public virtual Note Note { get; set; }
-
         public virtual ICollection<ContactDoc> ContactDocs { get; set; }
+
+        public virtual ICollection<Note> Notes { get; set; }
     }
 }

@@ -124,7 +124,7 @@ namespace HR.WebApi.Controllers
             Employee employee = this._employeeService.Get(model.Id.Value);
             if (employee == null)
             {
-                result = Request.CreateResponse(HttpStatusCode.BadRequest);
+                result = Request.CreateResponse(HttpStatusCode.NotFound);
             }
 
             employee.FirstName = model.FirstName;
@@ -163,7 +163,7 @@ namespace HR.WebApi.Controllers
             employeeModel.FirstName = employee.FirstName;
             employeeModel.LastName = employee.LastName;
             employeeModel.Id = employee.Id;
-            result = Request.CreateResponse(HttpStatusCode.Created, employeeModel);
+            result = Request.CreateResponse(HttpStatusCode.OK, employeeModel);
             return result;
         }
 
@@ -176,6 +176,7 @@ namespace HR.WebApi.Controllers
                 result = Request.CreateResponse(HttpStatusCode.BadRequest);
             }
 
+            await this._employeeResumeService.DeleteDocumentsByEmployeeId(id.Value);
             await this._employeeService.DeleteEmployee(id.Value);
             return new HttpResponseMessage(HttpStatusCode.OK);
         }

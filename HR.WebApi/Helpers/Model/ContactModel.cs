@@ -1,5 +1,5 @@
-﻿using MultipartDataMediaFormatter.Infrastructure;
-using HR.WebApi.Models;
+﻿using HR.WebApi.Models;
+using MultipartDataMediaFormatter.Infrastructure;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +9,12 @@ namespace HR.WebApi.Helpers.Model
 {
     public class ContactModel
     {
+        public ContactModel()
+        {
+            this.Notes = new List<Note>();
+            this.ContactDocs = new List<ContactDoc>();
+        }
+
         public Int32 Id { get; set; }
 
         public Int32 DepartmentId { get; set; }
@@ -34,5 +40,7 @@ namespace HR.WebApi.Helpers.Model
         public List<HttpFile> Files { get; set; }
 
         public List<ContactDoc> ContactDocs { get; set; }
+
+        public List<Note> Notes { get; set; }
     }
 }

@@ -19,9 +19,7 @@ namespace HR.WebApi.Repositories
         {
             this._upRepository = upRepository;
         }
-
-
-
+        
 
         public MethodResult<Contact> Add(Contact model)
         {
@@ -55,13 +53,13 @@ namespace HR.WebApi.Repositories
 
         public async Task<List<Contact>> GetAll()
         {
-            var data = _upRepository.Contacts.Include(p => p.ContactDocs).ToList();
+            var data = _upRepository.Contacts.Include(p => p.ContactDocs).Include(p => p.Notes).ToList();
             return data;
         }
 
         public async Task<List<Contact>> GetAllByDepartmentId(Int32 eventTypeId)
         {
-            var data = _upRepository.Contacts.Include(p => p.ContactDocs).Where(p => p.DepartmentId != null && p.DepartmentId == eventTypeId).ToList();
+            var data = _upRepository.Contacts.Include(p => p.ContactDocs).Include(p => p.Notes).Where(p => p.DepartmentId != null && p.DepartmentId == eventTypeId).ToList();
             return data;
         }
 

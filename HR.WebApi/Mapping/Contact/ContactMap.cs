@@ -27,7 +27,7 @@ namespace HR.WebApi.Mapping
             this.Property(t => t.EmailAddress);
             this.Property(t => t.QuickFacts).HasMaxLength(200);
             this.Property(t => t.Website).HasMaxLength(200);
-            this.Property(t => t.NoteId);
+            
             this.Property(t => t.DepartmentId);
 
             // Table & Column Mappings
@@ -41,7 +41,6 @@ namespace HR.WebApi.Mapping
             this.Property(t => t.EmailAddress).HasColumnName("EmailAddress");
             this.Property(t => t.QuickFacts).HasColumnName("QuickFacts");
             this.Property(t => t.Website).HasColumnName("Website");
-            this.Property(t => t.NoteId).HasColumnName("NoteId");
             this.Property(t => t.DepartmentId).HasColumnName("DepartmentId");
         }
 

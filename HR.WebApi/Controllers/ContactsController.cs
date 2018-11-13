@@ -23,14 +23,17 @@ namespace HR.WebApi.Controllers
 
         private readonly IContactService _contactService;
         private readonly IContactDocService _contactDocService;
+        private readonly INoteService _noteService;
 
         public ContactsController(
             IContactService contactService,
-             IContactDocService contactDocService
+            IContactDocService contactDocService,
+             INoteService noteService
           )
         {
             this._contactService = contactService;
             this._contactDocService = contactDocService;
+            this._noteService = noteService;
 
         }
 
@@ -52,6 +55,15 @@ namespace HR.WebApi.Controllers
             contactModel.Website = model.Website;
 
             this._contactService.Add(contactModel);
+
+            foreach (var note in model.Notes)
+            {
+                Note dbNote = new Note();
+                dbNote.ContactId = note.ContactId;
+                dbNote.Title = note.Title;
+                dbNote.Desc = note.Desc;
+                this._noteService.Add(dbNote);
+            }
 
             if (model.Files != null && model.Files.Count > 0)
             {
@@ -79,6 +91,20 @@ namespace HR.WebApi.Controllers
 
         }
 
+        [Route("{contactId:int}/notes")]
+        [HttpGet]
+        public async Task<IEnumerable<Note>> GetNotesByContactId(Int32 contactId)
+        {
+            if (contactId == 0)
+            {
+                Request.CreateResponse(HttpStatusCode.BadRequest);
+                return null;
+            }
+
+            var result = await this._noteService.GetAll(contactId);
+            return result;
+        }
+
         [HttpGet]
         public async Task<IEnumerable<Contact>> GetContacts()
         {
@@ -96,6 +122,17 @@ namespace HR.WebApi.Controllers
                     contactDoc.Id = dbDoc.Id;
                     contactModel.ContactDocs.Add(contactDoc);
                 }
+
+                foreach (var dbNote in model.Notes)
+                {
+                    Note note = new Note();
+                    note.ContactId = dbNote.ContactId;
+                    note.Title = dbNote.Title;
+                    note.Desc = dbNote.Desc;
+                    note.Id = dbNote.Id;
+                    contactModel.Notes.Add(note);
+                }
+
                 contactModel.Id = model.Id;
                 contactModel.Title = model.Title;
                 contactModel.DepartmentId = model.DepartmentId;
@@ -112,6 +149,21 @@ namespace HR.WebApi.Controllers
             }
 
             return contactmodelList;
+        }
+
+        [HttpPost]
+        public async Task<HttpResponseMessage> PostNote(Note model)
+        {
+            HttpResponseMessage result = null;
+            Note noteModel = new Note();
+            noteModel.Title = model.Title;
+            noteModel.Desc = model.Desc;
+            noteModel.ContactId = model.ContactId;
+            this._noteService.Add(noteModel);
+
+            result = Request.CreateResponse(HttpStatusCode.Created, noteModel);
+
+            return result;
         }
 
         [HttpGet]
@@ -134,7 +186,7 @@ namespace HR.WebApi.Controllers
             Contact contactModel = this._contactService.Get(model.Id);
             if (contactModel == null)
             {
-                result = Request.CreateResponse(HttpStatusCode.BadRequest);
+                result = Request.CreateResponse(HttpStatusCode.NotFound);
             }
 
             contactModel.Title = model.Title;
@@ -148,6 +200,8 @@ namespace HR.WebApi.Controllers
             contactModel.Website = model.Website;
             contactModel.Website = model.Website;
             this._contactService.Add(contactModel);
+
+
 
             if (model.Files != null && model.Files.Count > 0)
             {
@@ -166,7 +220,7 @@ namespace HR.WebApi.Controllers
                     this._contactDocService.Add(contactDoc);
                 }
 
-               
+
                 foreach (var dbDoc in model.ContactDocs)
                 {
                     ContactDoc eventDoc = new ContactDoc();
@@ -176,6 +230,16 @@ namespace HR.WebApi.Controllers
                     eventDoc.Id = dbDoc.Id;
                     returnModel.ContactDocs.Add(eventDoc);
                 }
+            }
+
+            foreach (var dbNote in model.Notes)
+            {
+                Note note = new Note();
+                note.ContactId = dbNote.ContactId;
+                note.Title = dbNote.Title;
+                note.Desc = dbNote.Desc;
+                note.Id = dbNote.Id;
+                contactModel.Notes.Add(note);
             }
 
             returnModel.Title = model.Title;
@@ -189,7 +253,33 @@ namespace HR.WebApi.Controllers
             returnModel.Website = model.Website;
             returnModel.Website = model.Website;
             returnModel.Id = model.Id;
-            result = Request.CreateResponse(HttpStatusCode.Created, returnModel);
+            result = Request.CreateResponse(HttpStatusCode.OK, returnModel);
+
+            return result;
+        }
+
+        [HttpPut]
+        public async Task<HttpResponseMessage> PutNote(Note model)
+        {
+            HttpResponseMessage result = null;
+
+            if (model.Id == 0)
+            {
+                result = Request.CreateResponse(HttpStatusCode.BadRequest);
+            }
+
+            Note noteModel = this._noteService.Get(model.Id);
+            if (noteModel == null)
+            {
+                result = Request.CreateResponse(HttpStatusCode.NotFound);
+            }
+
+            noteModel.Title = model.Title;
+            noteModel.Desc = model.Desc;
+            noteModel.ContactId = model.ContactId;
+            this._noteService.Add(noteModel);
+
+            result = Request.CreateResponse(HttpStatusCode.OK, noteModel);
 
             return result;
         }
@@ -209,9 +299,29 @@ namespace HR.WebApi.Controllers
             {
                 result = Request.CreateResponse(HttpStatusCode.BadRequest);
             }
-            
+
             await this._contactDocService.DeleteContactDocumentsByContactId(contactId.Value);
             await this._contactService.DeleteContact(contactId.Value);
+            return new HttpResponseMessage(HttpStatusCode.OK);
+        }
+
+        [HttpDelete]
+        [Route("{contactId:int}/notes/{noteId:int}")]
+        public async Task<HttpResponseMessage> DeleteNoteById(Int32 contactId, Int32 noteId = 0)
+        {
+            HttpResponseMessage result = null;
+            if (noteId == 0)
+            {
+                result = Request.CreateResponse(HttpStatusCode.BadRequest);
+            }
+
+            Note note = this._noteService.Get(noteId);
+            if (note == null)
+            {
+                result = Request.CreateResponse(HttpStatusCode.NotFound);
+            }
+
+            await this._noteService.DeleteNote(noteId);
             return new HttpResponseMessage(HttpStatusCode.OK);
         }
 

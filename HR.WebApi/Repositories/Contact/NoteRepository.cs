@@ -20,7 +20,11 @@ namespace HR.WebApi.Repositories
             this._upRepository = upRepository;
         }
 
-
+        public async Task<List<Note>> GetAll(Int32 contactId)
+        {
+            var data = _upRepository.Notes.Where(p => p.ContactId == contactId).ToList();
+            return data;
+        }
 
 
         public MethodResult<Note> Add(Note model)

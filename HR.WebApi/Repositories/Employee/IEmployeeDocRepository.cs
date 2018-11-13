@@ -7,9 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HR.WebApi.Services
+namespace HR.WebApi.Repositories
 {
-    public interface IEmployeeDocService
+    public interface IEmployeeDocRepository
     {
         MethodResult<EmployeeDoc> Add(EmployeeDoc model);
 
@@ -22,6 +22,7 @@ namespace HR.WebApi.Services
         Task<bool> DeleteFileAsync(string path);
 
         int GetMaxId();
+
         Task<bool> DeleteDocumentsByEmployeeId(Int32 Id);
     }
 }
