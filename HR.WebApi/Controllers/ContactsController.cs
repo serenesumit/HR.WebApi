@@ -59,7 +59,7 @@ namespace HR.WebApi.Controllers
             foreach (var note in model.Notes)
             {
                 Note dbNote = new Note();
-                dbNote.ContactId = note.ContactId;
+                dbNote.ContactId = contactModel.Id;
                 dbNote.Title = note.Title;
                 dbNote.Desc = note.Desc;
                 this._noteService.Add(dbNote);
@@ -265,10 +265,9 @@ namespace HR.WebApi.Controllers
             foreach (var dbNote in model.Notes)
             {
                 Note note = new Note();
-                note.ContactId = dbNote.ContactId;
+                note.ContactId = contactModel.Id;
                 note.Title = dbNote.Title;
                 note.Desc = dbNote.Desc;
-                note.Id = dbNote.Id;
                 contactModel.Notes.Add(note);
                 returnModel.Notes.Add(note);
             }

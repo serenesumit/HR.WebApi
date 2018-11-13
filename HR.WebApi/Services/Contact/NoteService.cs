@@ -21,17 +21,17 @@ namespace HR.WebApi.Services
 
         public MethodResult<Note> Add(Note model)
         {
-            throw new NotImplementedException();
+          return this._noteRepository.Add(model);
         }
 
         public Task<Note> DeleteNote(int Id)
         {
-            throw new NotImplementedException();
+            return this._noteRepository.DeleteNote(Id);
         }
 
         public Note Get(int id)
         {
-            throw new NotImplementedException();
+            return this._noteRepository.Get(id);
         }
 
         public Task<List<Note>> GetAll(Int32 contactId)

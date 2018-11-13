@@ -254,6 +254,10 @@
     <Compile Include="Migrations\201811122134072_updateNotestable.Designer.cs">
       <DependentUpon>201811122134072_updateNotestable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201811131112269_update-phonenumber-field.cs" />
+    <Compile Include="Migrations\201811131112269_update-phonenumber-field.Designer.cs">
+      <DependentUpon>201811131112269_update-phonenumber-field.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Contact\Contact.cs" />
     <Compile Include="Models\Contact\ContactDoc.cs" />
@@ -335,6 +339,8 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="Properties\PublishProfiles\SumitEmployeeApi - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\SumitEmployeeApi - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -394,6 +400,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201811122134072_updateNotestable.resx">
       <DependentUpon>201811122134072_updateNotestable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811131112269_update-phonenumber-field.resx">
+      <DependentUpon>201811131112269_update-phonenumber-field.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

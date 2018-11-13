@@ -248,7 +248,7 @@ namespace HR.WebApi.Controllers
         }
 
         [HttpDelete]
-        [Route("{eventId:int}/eventsDocs/{eventdocId:int}")]
+        [Route("{eventId:int}/eventDocs/{eventdocId:int}")]
         public async Task<HttpResponseMessage> DeleteEvent(Int32 eventId, Int32? eventdocId)
         {
             HttpResponseMessage result = null;
@@ -286,6 +286,7 @@ namespace HR.WebApi.Controllers
             returnModel.Location = model.Location;
             returnModel.City = model.City;
             returnModel.State = model.State;
+            
             returnModel.Zip = model.Zip;
             returnModel.StartDate = model.StartDate;
             returnModel.EndDate = model.EndDate;

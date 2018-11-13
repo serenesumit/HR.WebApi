@@ -24,9 +24,9 @@ namespace HR.WebApi.Models
 
         public string Name { get; set; }
 
-        public Int32 PhoneNumber { get; set; }
+        public string PhoneNumber { get; set; }
 
-        public Int32 MobileNumber { get; set; }
+        public string MobileNumber { get; set; }
 
         public string EmailAddress { get; set; }
 

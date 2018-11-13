@@ -17,7 +17,7 @@ using System.Web.Http.Cors;
 namespace HR.WebApi.Controllers
 {
     [EnableCors(origins: "*", headers: "*", methods: "*")]
-    [RoutePrefix("apiemployee")]
+    [RoutePrefix("api/employee")]
     public class EmployeeController : ApiController
     {
 
