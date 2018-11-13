@@ -42,7 +42,7 @@ namespace HR.WebApi.Controllers
 
             if (string.IsNullOrEmpty(model.FirstName))
             {
-                result = Request.CreateResponse(HttpStatusCode.BadRequest);
+              return Request.CreateResponse(HttpStatusCode.BadRequest);
             }
 
             Employee employee = new Employee();
@@ -118,13 +118,13 @@ namespace HR.WebApi.Controllers
 
             if (model.Id == 0)
             {
-                result = Request.CreateResponse(HttpStatusCode.BadRequest);
+              return Request.CreateResponse(HttpStatusCode.BadRequest);
             }
 
             Employee employee = this._employeeService.Get(model.Id.Value);
             if (employee == null)
             {
-                result = Request.CreateResponse(HttpStatusCode.NotFound);
+              return Request.CreateResponse(HttpStatusCode.NotFound);
             }
 
             employee.FirstName = model.FirstName;
@@ -173,7 +173,7 @@ namespace HR.WebApi.Controllers
             HttpResponseMessage result = null;
             if (!id.HasValue)
             {
-                result = Request.CreateResponse(HttpStatusCode.BadRequest);
+               return Request.CreateResponse(HttpStatusCode.BadRequest);
             }
 
             await this._employeeResumeService.DeleteDocumentsByEmployeeId(id.Value);
@@ -188,7 +188,13 @@ namespace HR.WebApi.Controllers
             HttpResponseMessage result = null;
             if (!employeeId.HasValue || !resumeId.HasValue)
             {
-                result = Request.CreateResponse(HttpStatusCode.BadRequest);
+                return Request.CreateResponse(HttpStatusCode.BadRequest);
+            }
+
+            Employee emp = this._employeeService.Get(employeeId.Value);
+            if (emp == null)
+            {
+                return Request.CreateResponse(HttpStatusCode.NotFound);
             }
 
             this._employeeResumeService.DeleteEmployeeDocument(employeeId.Value, resumeId.Value);

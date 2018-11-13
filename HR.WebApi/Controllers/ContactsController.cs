@@ -180,13 +180,13 @@ namespace HR.WebApi.Controllers
 
             if (model.Id == 0)
             {
-                result = Request.CreateResponse(HttpStatusCode.BadRequest);
+                return Request.CreateResponse(HttpStatusCode.BadRequest);
             }
             Contact returnModel = new Contact();
             Contact contactModel = this._contactService.Get(model.Id);
             if (contactModel == null)
             {
-                result = Request.CreateResponse(HttpStatusCode.NotFound);
+                return Request.CreateResponse(HttpStatusCode.NotFound);
             }
 
             contactModel.Title = model.Title;
@@ -265,13 +265,13 @@ namespace HR.WebApi.Controllers
 
             if (model.Id == 0)
             {
-                result = Request.CreateResponse(HttpStatusCode.BadRequest);
+                return Request.CreateResponse(HttpStatusCode.BadRequest);
             }
 
             Note noteModel = this._noteService.Get(model.Id);
             if (noteModel == null)
             {
-                result = Request.CreateResponse(HttpStatusCode.NotFound);
+               return Request.CreateResponse(HttpStatusCode.NotFound);
             }
 
             noteModel.Title = model.Title;
@@ -291,13 +291,13 @@ namespace HR.WebApi.Controllers
             HttpResponseMessage result = null;
             if (contactId == 0)
             {
-                result = Request.CreateResponse(HttpStatusCode.BadRequest);
+               return Request.CreateResponse(HttpStatusCode.BadRequest);
             }
 
             Contact contactModel = this._contactService.Get(contactId.Value);
             if (contactModel == null)
             {
-                result = Request.CreateResponse(HttpStatusCode.BadRequest);
+              return Request.CreateResponse(HttpStatusCode.BadRequest);
             }
 
             await this._contactDocService.DeleteContactDocumentsByContactId(contactId.Value);
@@ -312,13 +312,13 @@ namespace HR.WebApi.Controllers
             HttpResponseMessage result = null;
             if (noteId == 0)
             {
-                result = Request.CreateResponse(HttpStatusCode.BadRequest);
+               return Request.CreateResponse(HttpStatusCode.BadRequest);
             }
 
             Note note = this._noteService.Get(noteId);
             if (note == null)
             {
-                result = Request.CreateResponse(HttpStatusCode.NotFound);
+               return Request.CreateResponse(HttpStatusCode.NotFound);
             }
 
             await this._noteService.DeleteNote(noteId);
@@ -332,7 +332,7 @@ namespace HR.WebApi.Controllers
             HttpResponseMessage result = null;
             if (contactId == 0 || contactdocId == 0)
             {
-                result = Request.CreateResponse(HttpStatusCode.BadRequest);
+                return Request.CreateResponse(HttpStatusCode.BadRequest);
             }
 
             this._contactDocService.DeleteContactDocument(contactId, contactdocId.Value);

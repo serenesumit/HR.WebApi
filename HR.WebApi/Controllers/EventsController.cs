@@ -131,13 +131,13 @@ namespace HR.WebApi.Controllers
 
             if (model.Id == 0)
             {
-                result = Request.CreateResponse(HttpStatusCode.BadRequest);
+                return Request.CreateResponse(HttpStatusCode.BadRequest);
             }
 
             Event eventModel = this._eventService.Get(model.Id);
             if (eventModel == null)
             {
-                result = Request.CreateResponse(HttpStatusCode.NotFound);
+                return Request.CreateResponse(HttpStatusCode.NotFound);
             }
 
             eventModel.Title = model.Title;
@@ -207,13 +207,13 @@ namespace HR.WebApi.Controllers
             HttpResponseMessage result = null;
             if (eventid == 0)
             {
-                result = Request.CreateResponse(HttpStatusCode.BadRequest);
+               return Request.CreateResponse(HttpStatusCode.BadRequest);
             }
 
             Event eventModel = this._eventService.Get(eventid.Value);
             if (eventModel == null)
             {
-                result = Request.CreateResponse(HttpStatusCode.NotFound);
+              return Request.CreateResponse(HttpStatusCode.NotFound);
             }
 
             await this._eventDocService.DeleteEventDocumentsByEventId(eventid.Value);
@@ -228,13 +228,13 @@ namespace HR.WebApi.Controllers
             HttpResponseMessage result = null;
             if (eventId == 0 || eventdocId == 0)
             {
-                result = Request.CreateResponse(HttpStatusCode.BadRequest);
+               return Request.CreateResponse(HttpStatusCode.BadRequest);
             }
 
             Event eventModel = this._eventService.Get(eventId);
             if (eventModel == null)
             {
-                result = Request.CreateResponse(HttpStatusCode.NotFound);
+               return Request.CreateResponse(HttpStatusCode.NotFound);
             }
 
             this._eventDocService.DeleteEventDocument(eventId, eventdocId.Value);
