@@ -122,6 +122,10 @@ namespace HR.WebApi.Repositories
 
         }
 
+        public EventDoc Get(int id)
+        {
+            return this._upRepository.EventDocs.Where(p => p.Id == id).FirstOrDefault();
+        }
 
     }
 }

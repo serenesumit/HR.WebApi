@@ -7,13 +7,8 @@ using System.Web;
 
 namespace HR.WebApi.Helpers.Model
 {
-    public class ContactModel
+    public class ContactDTO
     {
-        public ContactModel()
-        {
-            this.Notes = new List<Note>();
-            this.ContactDocs = new List<ContactDoc>();
-        }
 
         public Int32 Id { get; set; }
 
@@ -36,11 +31,5 @@ namespace HR.WebApi.Helpers.Model
         public string Website { get; set; }
 
         public List<HttpFile> Files { get; set; }
-
-        public List<ContactDoc> ContactDocs { get; set; }
-
-        public List<Note> Notes { get; set; }
-
-        public Department Department { get; set; }
     }
 }

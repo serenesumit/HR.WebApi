@@ -46,6 +46,11 @@ namespace HR.WebApi.Services
             return this._contactDocRepository.DeleteFileAsync(path);
         }
 
+        public ContactDoc Get(int id)
+        {
+            return this._contactDocRepository.Get(id);
+        }
+
         public int GetMaxId()
         {
             return this._contactDocRepository.GetMaxId();

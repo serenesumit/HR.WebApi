@@ -119,5 +119,10 @@ namespace HR.WebApi.Repositories
             result.Result = model;
             return result;
         }
+
+        public ContactDoc Get(int id)
+        {
+            return this._upRepository.ContactDocs.Where(p => p.Id == id).FirstOrDefault();
+        }
     }
 }

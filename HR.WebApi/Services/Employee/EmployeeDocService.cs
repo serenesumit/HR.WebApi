@@ -67,5 +67,10 @@ namespace HR.WebApi.Services
         {
             return this._employeeDocRepository.GetMaxId();
         }
+
+        public EmployeeDoc Get(int id)
+        {
+            return this._employeeDocRepository.Get(id);
+        }
     }
 }

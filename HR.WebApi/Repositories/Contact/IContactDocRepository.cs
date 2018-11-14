@@ -24,5 +24,7 @@ namespace HR.WebApi.Repositories
         Int32 GetMaxId();
 
         Task<bool> DeleteContactDocumentsByContactId(Int32 contactId);
+
+        ContactDoc Get(int id);
     }
 }

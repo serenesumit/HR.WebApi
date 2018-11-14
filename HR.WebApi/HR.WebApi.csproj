@@ -231,10 +231,12 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\Model\ContactDTO.cs" />
     <Compile Include="Helpers\Model\ContactModel.cs" />
     <Compile Include="Helpers\Model\EmployeeModel.cs" />
     <Compile Include="Helpers\Model\EventModel.cs" />
     <Compile Include="Helpers\Model\MethodResult.cs" />
+    <Compile Include="Helpers\Model\NoteDTO.cs" />
     <Compile Include="Helpers\Model\UpFile.cs" />
     <Compile Include="Mapping\Contact\ContactDocMap.cs" />
     <Compile Include="Mapping\Contact\ContactMap.cs" />
@@ -279,8 +281,10 @@
     <Compile Include="Repositories\Common\DbContextRepository.cs" />
     <Compile Include="Repositories\Contact\ContactDocRepository.cs" />
     <Compile Include="Repositories\Contact\ContactRepository.cs" />
+    <Compile Include="Repositories\Contact\DepartmentRepository.cs" />
     <Compile Include="Repositories\Contact\IContactDocRepository.cs" />
     <Compile Include="Repositories\Contact\IContactRepository.cs" />
+    <Compile Include="Repositories\Contact\IDepartmentRepository.cs" />
     <Compile Include="Repositories\Contact\INoteRepository.cs" />
     <Compile Include="Repositories\Contact\NoteRepository.cs" />
     <Compile Include="Repositories\Employee\EmployeeDocRepository.cs" />
@@ -289,8 +293,10 @@
     <Compile Include="Repositories\Employee\IEmployeeRepository.cs" />
     <Compile Include="Services\Contact\ContactDocService.cs" />
     <Compile Include="Services\Contact\ContactService.cs" />
+    <Compile Include="Services\Contact\DepartmentService.cs" />
     <Compile Include="Services\Contact\IContactDocService.cs" />
     <Compile Include="Services\Contact\IContactService.cs" />
+    <Compile Include="Services\Contact\IDepartmentService.cs" />
     <Compile Include="Services\Contact\INoteService.cs" />
     <Compile Include="Services\Contact\NoteService.cs" />
     <Compile Include="Repositories\Event\EventDocRepository.cs" />

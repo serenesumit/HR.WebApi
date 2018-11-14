@@ -23,17 +23,24 @@ namespace HR.WebApi.Controllers
 
         private readonly IContactService _contactService;
         private readonly IContactDocService _contactDocService;
+        private readonly IDepartmentService _departmentService;
 
         public DepartmentsController(
             IContactService contactService,
-             IContactDocService contactDocService
+             IContactDocService contactDocService,
+              IDepartmentService departmentService
           )
         {
             this._contactService = contactService;
             this._contactDocService = contactDocService;
-
+            this._departmentService = departmentService;
         }
 
+
+        public async Task<IEnumerable<Department>> GetDepartments()
+        {
+           return await this._departmentService.GetAll();
+        }
 
         [Route("{id:int}/contacts")]
         [HttpGet]

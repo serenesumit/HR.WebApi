@@ -24,5 +24,7 @@ namespace HR.WebApi.Repositories
         int GetMaxId();
 
         Task<bool> DeleteDocumentsByEmployeeId(Int32 Id);
+
+        EmployeeDoc Get(int id);
     }
 }

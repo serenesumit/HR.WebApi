@@ -191,15 +191,20 @@ namespace HR.WebApi.Controllers
             {
                 return Request.CreateResponse(HttpStatusCode.BadRequest);
             }
+            var employee = this._employeeService.Get(id.Value);
+            if (employee == null)
+            {
+                return Request.CreateResponse(HttpStatusCode.NotFound);
+            }
 
             await this._employeeResumeService.DeleteDocumentsByEmployeeId(id.Value);
             await this._employeeService.DeleteEmployee(id.Value);
-            return new HttpResponseMessage(HttpStatusCode.OK);
+            return Request.CreateResponse(HttpStatusCode.OK, employee);
         }
 
         [HttpDelete]
         [Route("{employeeId:int}/employee-resume/{resumeId:int}")]
-        public async Task<HttpResponseMessage> DeleteEmployee(Int32? employeeId, Int32? resumeId)
+        public async Task<HttpResponseMessage> DeleteEmployeeDocument(Int32? employeeId, Int32? resumeId)
         {
             HttpResponseMessage result = null;
             if (!employeeId.HasValue || !resumeId.HasValue)
@@ -207,14 +212,14 @@ namespace HR.WebApi.Controllers
                 return Request.CreateResponse(HttpStatusCode.BadRequest);
             }
 
-            Employee emp = this._employeeService.Get(employeeId.Value);
-            if (emp == null)
+            EmployeeDoc empDoc = this._employeeResumeService.Get(resumeId.Value);
+            if (empDoc == null)
             {
                 return Request.CreateResponse(HttpStatusCode.NotFound);
             }
 
             this._employeeResumeService.DeleteEmployeeDocument(employeeId.Value, resumeId.Value);
-            return new HttpResponseMessage(HttpStatusCode.OK);
+            return Request.CreateResponse(HttpStatusCode.OK, empDoc);
         }
 
     }

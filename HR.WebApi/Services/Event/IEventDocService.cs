@@ -24,5 +24,7 @@ namespace HR.WebApi.Services
         Int32 GetMaxId();
 
         Task<bool> DeleteEventDocumentsByEventId(Int32 eventId);
+
+        EventDoc Get(int id);
     }
 }

@@ -98,6 +98,11 @@ namespace HR.WebApi.Repositories
             return 1;
         }
 
+        public EmployeeDoc Get(int id)
+        {
+            return this._upRepository.EmployeeDocs.Where(p => p.Id == id).FirstOrDefault();
+        }
+
         public MethodResult<EmployeeDoc> Update(EmployeeDoc model)
         {
             var result = new MethodResult<EmployeeDoc>();

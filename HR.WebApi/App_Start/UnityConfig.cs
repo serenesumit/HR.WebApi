@@ -58,11 +58,12 @@ namespace HR.WebApi
             container.RegisterType<IEmployeeService, EmployeeService>();
             container.RegisterType<IEmployeeDocService, EmployeeDocService>();
 
-
+            container.RegisterType<IDepartmentRepository, DepartmentRepository>();
             container.RegisterType<IContactRepository, ContactRepository>();
             container.RegisterType<IContactDocRepository, ContactDocRepository>();
             container.RegisterType<INoteRepository, NoteRepository>();
 
+            container.RegisterType<IDepartmentService, DepartmentService>();
             container.RegisterType<IContactDocService, ContactDocService>();
             container.RegisterType<IContactService, ContactService>();
             container.RegisterType<INoteService, NoteService>();

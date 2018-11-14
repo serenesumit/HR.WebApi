@@ -244,7 +244,7 @@ namespace HR.WebApi.Controllers
 
             await this._eventDocService.DeleteEventDocumentsByEventId(eventid.Value);
             await this._eventService.DeleteEvent(eventid.Value);
-            return new HttpResponseMessage(HttpStatusCode.OK);
+            return  Request.CreateResponse(HttpStatusCode.OK, eventModel);
         }
 
         [HttpDelete]
@@ -257,14 +257,15 @@ namespace HR.WebApi.Controllers
                 return Request.CreateResponse(HttpStatusCode.BadRequest);
             }
 
-            Event eventModel = this._eventService.Get(eventId);
-            if (eventModel == null)
+            EventDoc eventDoc = this._eventDocService.Get(eventId);
+            if (eventDoc == null)
             {
                 return Request.CreateResponse(HttpStatusCode.NotFound);
             }
 
             this._eventDocService.DeleteEventDocument(eventId, eventdocId.Value);
-            return new HttpResponseMessage(HttpStatusCode.OK);
+
+            return Request.CreateResponse(HttpStatusCode.OK, eventDoc);
         }
 
 

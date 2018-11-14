@@ -56,6 +56,10 @@ namespace HR.WebApi.Services
             return this._eventDocRepository.DeleteEventDocumentsByEventId(eventId);
         }
 
+        public EventDoc Get(int id)
+        {
+            return this._eventDocRepository.Get(id);
+        }
     }
 
 

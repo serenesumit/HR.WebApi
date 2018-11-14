@@ -40,10 +40,7 @@ namespace HR.WebApi.Repositories
                 {
 
                     var dbnote = this._upRepository.Notes.Where(x => x.Id == model.Id).FirstOrDefault();
-                    if (dbnote != null)
-                    {
-                        dbnote.Title = model.Title;
-                    }
+                  
                 }
 
                 this._upRepository.SaveChanges();
