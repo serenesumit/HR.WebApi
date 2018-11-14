@@ -65,6 +65,11 @@ namespace HR.WebApi.Repositories
             return this._upRepository.Events.Include(p => p.EventDocs).Where(p => p.Id == id).FirstOrDefault();
         }
 
+        public async Task<List<Event>> GetAllByMonth(Int32 month, Int32 year)
+        {
+            return this._upRepository.Events.Include(p => p.EventDocs).Where(p => p.StartDate != null && p.StartDate.Month == month && p.StartDate.Year == year).ToList();
+        }
+
         public async Task<Event> DeleteEvent(Int32 Id)
         {
             var dbEvent = this._upRepository.Events.Where(p => p.Id == Id).FirstOrDefault();

@@ -297,12 +297,16 @@ namespace HR.WebApi.Controllers
             {
                 return Request.CreateResponse(HttpStatusCode.NotFound);
             }
+            dbNote.Title = model.Title;
+            dbNote.Desc = model.Desc;
+
             NoteDTO noteModel = new NoteDTO();
             noteModel.Title = model.Title;
             noteModel.Desc = model.Desc;
             noteModel.ContactId = model.ContactId;
             this._noteService.Add(dbNote);
             noteModel.Id = dbNote.Id;
+            
             result = Request.CreateResponse(HttpStatusCode.OK, noteModel);
 
             return result;

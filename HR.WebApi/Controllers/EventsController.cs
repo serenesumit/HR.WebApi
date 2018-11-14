@@ -120,6 +120,43 @@ namespace HR.WebApi.Controllers
         }
 
         [HttpGet]
+        [Route("{month:int}/{year:int}")]
+        public async Task<IEnumerable<Event>> GetEventsByMonth(Int32 month,Int32 year)
+        {
+            var result = await this._eventService.GetAllByMonth(month,year);
+            List<Event> eventmodelList = new List<Event>();
+            foreach (var model in result)
+            {
+                Event eventModel = new Event();
+                foreach (var dbDoc in model.EventDocs)
+                {
+                    EventDoc eventDoc = new EventDoc();
+                    eventDoc.EventId = dbDoc.EventId;
+                    eventDoc.Name = dbDoc.Name;
+                    eventDoc.Link = dbDoc.Link;
+                    eventDoc.Id = dbDoc.Id;
+                    eventModel.EventDocs.Add(eventDoc);
+                }
+
+                eventModel.Title = model.Title;
+                eventModel.EventTypeId = model.EventTypeId;
+                eventModel.Location = model.Location;
+                eventModel.City = model.City;
+                eventModel.State = model.State;
+                eventModel.Zip = model.Zip;
+                eventModel.StartDate = model.StartDate;
+                eventModel.EndDate = model.EndDate;
+                eventModel.Website = model.Website;
+                eventModel.Schedule = model.Schedule;
+                eventModel.Agenda = model.Agenda;
+                eventModel.Id = model.Id;
+                eventmodelList.Add(eventModel);
+            }
+
+            return eventmodelList;
+        }
+
+        [HttpGet]
         [Route("{eventId:int}")]
         public Event GetEvent(Int32 eventId)
         {

@@ -44,5 +44,10 @@ namespace HR.WebApi.Services
         {
             return this._eventRepository.GetAllByEventTypeId(eventTypeId);
         }
+
+        public Task<List<Event>> GetAllByMonth(int month, int year)
+        {
+            return this._eventRepository.GetAllByMonth(month, year);
+        }
     }
 }

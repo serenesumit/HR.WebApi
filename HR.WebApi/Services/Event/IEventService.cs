@@ -15,5 +15,6 @@ namespace HR.WebApi.Services
         Event Get(Int32 id);
         Task<Event> DeleteEvent(Int32 Id);
         Task<List<Event>> GetAllByEventTypeId(Int32 eventTypeId);
+        Task<List<Event>> GetAllByMonth(Int32 month, Int32 year);
     }
 }
