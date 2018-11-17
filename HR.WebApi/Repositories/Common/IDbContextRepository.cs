@@ -40,6 +40,12 @@ namespace HR.WebApi.Repositories.Common
 
         IDbSet<EventType> EventTypes { get; set; }
 
+        IDbSet<UserSetting> UserSettings { get; set; }
+
+        IDbSet<User> Users { get; set; }
+
+        IDbSet<Account> Accounts { get; set; }
+
 
         int SaveChanges();
 

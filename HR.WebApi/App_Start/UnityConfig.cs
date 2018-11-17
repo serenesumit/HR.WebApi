@@ -50,6 +50,10 @@ namespace HR.WebApi
             container.RegisterType<IEventRepository, EventRepository>();
             container.RegisterType<IEventDocRepository, EventDocRepository>();
 
+            container.RegisterType<IUserRepository, UserRepository>();
+            container.RegisterType<IAccountRepository, AccountRepository>();
+            container.RegisterType<IUserSettingRepository, UserSettingRepository>();
+
             container.RegisterType<IEventDocService, EventDocService>();
             container.RegisterType<IEventService, EventService>();
 
@@ -67,7 +71,12 @@ namespace HR.WebApi
             container.RegisterType<IContactDocService, ContactDocService>();
             container.RegisterType<IContactService, ContactService>();
             container.RegisterType<INoteService, NoteService>();
-            
+
+
+            container.RegisterType<IUserService, UserService>();
+            container.RegisterType<IAccountService, AccountService>();
+            container.RegisterType<IUserSettingService, UserSettingService>();
+
         }
     }
 }

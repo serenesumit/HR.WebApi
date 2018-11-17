@@ -51,6 +51,14 @@ namespace HR.WebApi.Repositories.Common
 
         public IDbSet<Note> Notes { get; set; }
 
+        public IDbSet<UserSetting> UserSettings { get; set; }
+
+        public IDbSet<User> Users { get; set; }
+
+        public IDbSet<Account> Accounts { get; set; }
+
+     
+
         public DbContext DbContext
         {
             get

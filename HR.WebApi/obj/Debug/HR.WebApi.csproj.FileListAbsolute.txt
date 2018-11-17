@@ -96,5 +96,4 @@ D:\Live Projects\HR.WebApi\HR.WebApi\obj\Debug\HR.WebApi.pdb
 D:\Live Projects\HR.WebApi\HR.WebApi\obj\Debug\HR.WebApi.Migrations.initial.resources
 D:\Live Projects\HR.WebApi\HR.WebApi\obj\Debug\HR.WebApi.csproj.GenerateResource.cache
 D:\Live Projects\HR.WebApi\HR.WebApi\obj\Debug\HR.WebApi.Migrations.updateNotestable.resources
-D:\Live Projects\HR.WebApi\HR.WebApi\obj\Debug\HR.WebApi.csprojAssemblyReference.cache
 D:\Live Projects\HR.WebApi\HR.WebApi\obj\Debug\HR.WebApi.Migrations.updatephonenumberfield.resources
