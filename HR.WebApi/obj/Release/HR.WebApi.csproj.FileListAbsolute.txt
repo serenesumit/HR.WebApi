@@ -98,3 +98,4 @@ D:\Live Projects\HR.WebApi\HR.WebApi\obj\Release\HR.WebApi.csproj.CopyComplete
 D:\Live Projects\HR.WebApi\HR.WebApi\obj\Release\HR.WebApi.dll
 D:\Live Projects\HR.WebApi\HR.WebApi\obj\Release\HR.WebApi.pdb
 D:\Live Projects\HR.WebApi\HR.WebApi\obj\Release\HR.WebApi.Migrations.updatephonenumberfield.resources
+D:\Live Projects\HR.WebApi\HR.WebApi\bin\log4net.dll

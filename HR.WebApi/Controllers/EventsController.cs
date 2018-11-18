@@ -242,24 +242,22 @@ namespace HR.WebApi.Controllers
                     this._eventDocService.Add(eventDoc);
                     returnModel.EventDocs.Add(eventDoc);
                 }
-
-             
-                returnModel.Title = model.Title;
-                returnModel.EventTypeId = model.EventTypeId;
-                returnModel.Location = model.Location;
-                returnModel.City = model.City;
-                returnModel.State = model.State;
-                returnModel.Zip = model.Zip;
-                returnModel.StartDate = model.StartDate;
-                returnModel.EndDate = model.EndDate;
-                returnModel.Website = model.Website;
-                returnModel.Schedule = model.Schedule;
-                returnModel.Agenda = model.Agenda;
-                returnModel.Id = model.Id;
-
-                result = Request.CreateResponse(HttpStatusCode.OK, returnModel);
             }
 
+            returnModel.Title = model.Title;
+            returnModel.EventTypeId = model.EventTypeId;
+            returnModel.Location = model.Location;
+            returnModel.City = model.City;
+            returnModel.State = model.State;
+            returnModel.Zip = model.Zip;
+            returnModel.StartDate = model.StartDate;
+            returnModel.EndDate = model.EndDate;
+            returnModel.Website = model.Website;
+            returnModel.Schedule = model.Schedule;
+            returnModel.Agenda = model.Agenda;
+            returnModel.Id = model.Id;
+
+            result = Request.CreateResponse(HttpStatusCode.OK, returnModel);
             return result;
         }
 
