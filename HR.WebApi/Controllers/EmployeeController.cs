@@ -31,7 +31,6 @@ namespace HR.WebApi.Controllers
         {
             this._employeeService = employeeService;
             this._employeeResumeService = employeeResumeService;
-
         }
 
         [HttpPost]
@@ -184,21 +183,22 @@ namespace HR.WebApi.Controllers
         }
 
         [HttpDelete]
-        public async Task<HttpResponseMessage> DeleteEmployee(Int32? id)
+        [Route("{employeeId:int}")]
+        public async Task<HttpResponseMessage> DeleteEmployee(Int32? employeeId)
         {
             HttpResponseMessage result = null;
-            if (!id.HasValue)
+            if (!employeeId.HasValue)
             {
                 return Request.CreateResponse(HttpStatusCode.BadRequest);
             }
-            var employee = this._employeeService.Get(id.Value);
+            var employee = this._employeeService.Get(employeeId.Value);
             if (employee == null)
             {
                 return Request.CreateResponse(HttpStatusCode.NotFound);
             }
 
-            await this._employeeResumeService.DeleteDocumentsByEmployeeId(id.Value);
-            await this._employeeService.DeleteEmployee(id.Value);
+            await this._employeeResumeService.DeleteDocumentsByEmployeeId(employeeId.Value);
+            await this._employeeService.DeleteEmployee(employeeId.Value);
             return Request.CreateResponse(HttpStatusCode.OK, employee);
         }
 
