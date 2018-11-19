@@ -98,4 +98,4 @@ D:\Live Projects\HR.WebApi\HR.WebApi\obj\Debug\HR.WebApi.csproj.GenerateResource
 D:\Live Projects\HR.WebApi\HR.WebApi\obj\Debug\HR.WebApi.Migrations.updateNotestable.resources
 D:\Live Projects\HR.WebApi\HR.WebApi\obj\Debug\HR.WebApi.Migrations.updatephonenumberfield.resources
 D:\Live Projects\HR.WebApi\HR.WebApi\bin\log4net.dll
-D:\Live Projects\HR.WebApi\HR.WebApi\obj\Debug\HR.WebApi.csprojAssemblyReference.cache
+D:\Live Projects\HR.WebApi\HR.WebApi\obj\Debug\HR.WebApi.Migrations.AddedUserandAccounttables.resources

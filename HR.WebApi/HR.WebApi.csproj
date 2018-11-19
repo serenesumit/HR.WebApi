@@ -252,6 +252,10 @@
     <Compile Include="Mapping\Event\EventDocMap.cs" />
     <Compile Include="Mapping\Event\EventMap.cs" />
     <Compile Include="Mapping\Event\EventTypeMap.cs" />
+    <Compile Include="Mapping\User\AccountMap.cs" />
+    <Compile Include="Mapping\User\UserAccountMap.cs" />
+    <Compile Include="Mapping\User\UserMap.cs" />
+    <Compile Include="Mapping\User\UserSettingMap.cs" />
     <Compile Include="Migrations\201811100954479_initial.cs" />
     <Compile Include="Migrations\201811100954479_initial.Designer.cs">
       <DependentUpon>201811100954479_initial.cs</DependentUpon>
@@ -263,6 +267,10 @@
     <Compile Include="Migrations\201811131112269_update-phonenumber-field.cs" />
     <Compile Include="Migrations\201811131112269_update-phonenumber-field.Designer.cs">
       <DependentUpon>201811131112269_update-phonenumber-field.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201811191148204_AddedUserandAccounttables.cs" />
+    <Compile Include="Migrations\201811191148204_AddedUserandAccounttables.Designer.cs">
+      <DependentUpon>201811191148204_AddedUserandAccounttables.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Contact\Contact.cs" />
@@ -431,6 +439,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201811131112269_update-phonenumber-field.resx">
       <DependentUpon>201811131112269_update-phonenumber-field.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811191148204_AddedUserandAccounttables.resx">
+      <DependentUpon>201811191148204_AddedUserandAccounttables.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

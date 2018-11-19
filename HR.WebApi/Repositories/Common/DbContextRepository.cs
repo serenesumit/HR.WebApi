@@ -57,7 +57,7 @@ namespace HR.WebApi.Repositories.Common
 
         public IDbSet<Account> Accounts { get; set; }
 
-     
+
 
         public DbContext DbContext
         {
@@ -123,6 +123,26 @@ namespace HR.WebApi.Repositories.Common
             modelBuilder.Configurations.Add(new EventMap());
             modelBuilder.Configurations.Add(new EventTypeMap());
             modelBuilder.Configurations.Add(new EventDocMap());
+
+            modelBuilder.Configurations.Add(new UserMap());
+            modelBuilder.Configurations.Add(new UserSettingMap());
+            modelBuilder.Configurations.Add(new AccountMap());
+
+
+            modelBuilder.Entity<User>()
+               .HasOptional(s => s.UserSetting)
+               .WithRequired(u => u.User);
+
+            // This will create UserAccounts Table in the db
+            modelBuilder.Entity<User>()
+               .HasMany<Account>(s => s.Accounts)
+               .WithMany(c => c.Users)
+               .Map(cs =>
+               {
+                   cs.MapLeftKey("UserId");
+                   cs.MapRightKey("AccountId");
+                   cs.ToTable("UserAccounts");
+               });
 
         }
     }

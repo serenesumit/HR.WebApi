@@ -53,12 +53,12 @@ namespace HR.WebApi.Repositories
 
         public Account Get(int id)
         {
-            return this._upRepository.Accounts.Include(p => p.User).Where(p => p.Id == id).FirstOrDefault();
+            return this._upRepository.Accounts.Include(p => p.Users).Where(p => p.Id == id).FirstOrDefault();
         }
 
         public async Task<List<Account>> GetAll()
         {
-            var data = _upRepository.Accounts.Include(p => p.User).ToList();
+            var data = _upRepository.Accounts.Include(p => p.Users).ToList();
             return data;
         }
 
