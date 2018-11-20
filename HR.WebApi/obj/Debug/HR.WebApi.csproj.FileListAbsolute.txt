@@ -100,3 +100,4 @@ D:\Live Projects\HR.WebApi\HR.WebApi\obj\Debug\HR.WebApi.Migrations.updatephonen
 D:\Live Projects\HR.WebApi\HR.WebApi\bin\log4net.dll
 D:\Live Projects\HR.WebApi\HR.WebApi\obj\Debug\HR.WebApi.Migrations.AddedUserandAccounttables.resources
 D:\Live Projects\HR.WebApi\HR.WebApi\obj\Debug\HR.WebApi.csprojAssemblyReference.cache
+D:\Live Projects\HR.WebApi\HR.WebApi\obj\Debug\HR.WebApi.Migrations.useraccount.resources

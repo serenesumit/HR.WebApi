@@ -12,6 +12,7 @@ namespace HR.WebApi.Models
         public Int32 Id { get; set; }
 
         public string Settings { get; set; }
+        
 
         public virtual User User { get; set; }
     }

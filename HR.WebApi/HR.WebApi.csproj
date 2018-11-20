@@ -276,6 +276,10 @@
     <Compile Include="Migrations\201811191148204_AddedUserandAccounttables.Designer.cs">
       <DependentUpon>201811191148204_AddedUserandAccounttables.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201811200110156_useraccount.cs" />
+    <Compile Include="Migrations\201811200110156_useraccount.Designer.cs">
+      <DependentUpon>201811200110156_useraccount.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Contact\Contact.cs" />
     <Compile Include="Models\Contact\ContactDoc.cs" />
@@ -446,6 +450,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201811191148204_AddedUserandAccounttables.resx">
       <DependentUpon>201811191148204_AddedUserandAccounttables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811200110156_useraccount.resx">
+      <DependentUpon>201811200110156_useraccount.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

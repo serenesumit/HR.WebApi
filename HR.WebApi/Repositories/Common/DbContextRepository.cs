@@ -28,6 +28,7 @@ namespace HR.WebApi.Repositories.Common
         {
             //// (connectionString)
             this.Configuration.LazyLoadingEnabled = false;
+            Database.SetInitializer<DbContextRepository>(null);
         }
 
         public IDbSet<Employee> Employees { get; set; }
@@ -56,6 +57,10 @@ namespace HR.WebApi.Repositories.Common
         public IDbSet<User> Users { get; set; }
 
         public IDbSet<Account> Accounts { get; set; }
+
+        public IDbSet<UserAccount> UserAccounts { get; set; }
+
+        
 
 
 
