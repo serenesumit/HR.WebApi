@@ -224,6 +224,7 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Controllers\AccountsController.cs" />
     <Compile Include="Controllers\EventTypeController.cs" />
     <Compile Include="Controllers\EventsController.cs" />
     <Compile Include="Controllers\EmployeeController.cs" />
@@ -235,6 +236,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\Model\AccountDTO.cs" />
     <Compile Include="Helpers\Model\ContactDTO.cs" />
     <Compile Include="Helpers\Model\ContactModel.cs" />
     <Compile Include="Helpers\Model\EmployeeModel.cs" />
@@ -242,6 +244,8 @@
     <Compile Include="Helpers\Model\MethodResult.cs" />
     <Compile Include="Helpers\Model\NoteDTO.cs" />
     <Compile Include="Helpers\Model\UpFile.cs" />
+    <Compile Include="Helpers\Model\UserDTO.cs" />
+    <Compile Include="Helpers\Model\UserSettingDTO.cs" />
     <Compile Include="Mapping\Contact\ContactDocMap.cs" />
     <Compile Include="Mapping\Contact\ContactMap.cs" />
     <Compile Include="Mapping\Contact\DepartmentMap.cs" />
