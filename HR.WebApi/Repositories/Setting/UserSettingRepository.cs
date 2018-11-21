@@ -62,7 +62,7 @@ namespace HR.WebApi.Repositories
 
         public async Task<List<UserSetting>> GetAllByUserId(int userId)
         {
-            var data = _upRepository.UserSettings.Include(p => p.User).Where(p => p.User != null && p.User.Id == userId).ToList();
+            var data = _upRepository.UserSettings.Include(p => p.User).Where(p => p.User != null && p.User.UID == userId).ToList();
             return data;
         }
     }

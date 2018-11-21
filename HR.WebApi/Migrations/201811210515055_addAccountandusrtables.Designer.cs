@@ -7,13 +7,13 @@ namespace HR.WebApi.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class useraccount : IMigrationMetadata
+    public sealed partial class addAccountandusrtables : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(useraccount));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(addAccountandusrtables));
         
         string IMigrationMetadata.Id
         {
-            get { return "201811200110156_useraccount"; }
+            get { return "201811210515055_addAccountandusrtables"; }
         }
         
         string IMigrationMetadata.Source

@@ -45,6 +45,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=4.2.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.4.2.0\lib\net45\AutoMapper.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -190,6 +193,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\AutoMapConfigure.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\SwaggerConfig.cs" />
@@ -237,6 +241,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\Model\AccountDTO.cs" />
+    <Compile Include="Helpers\Model\AccountModel.cs" />
     <Compile Include="Helpers\Model\ContactDTO.cs" />
     <Compile Include="Helpers\Model\ContactModel.cs" />
     <Compile Include="Helpers\Model\EmployeeModel.cs" />
@@ -245,6 +250,7 @@
     <Compile Include="Helpers\Model\NoteDTO.cs" />
     <Compile Include="Helpers\Model\UpFile.cs" />
     <Compile Include="Helpers\Model\UserDTO.cs" />
+    <Compile Include="Helpers\Model\UserModel.cs" />
     <Compile Include="Helpers\Model\UserSettingDTO.cs" />
     <Compile Include="Mapping\Contact\ContactDocMap.cs" />
     <Compile Include="Mapping\Contact\ContactMap.cs" />
@@ -272,13 +278,9 @@
     <Compile Include="Migrations\201811131112269_update-phonenumber-field.Designer.cs">
       <DependentUpon>201811131112269_update-phonenumber-field.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201811191148204_AddedUserandAccounttables.cs" />
-    <Compile Include="Migrations\201811191148204_AddedUserandAccounttables.Designer.cs">
-      <DependentUpon>201811191148204_AddedUserandAccounttables.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201811200110156_useraccount.cs" />
-    <Compile Include="Migrations\201811200110156_useraccount.Designer.cs">
-      <DependentUpon>201811200110156_useraccount.cs</DependentUpon>
+    <Compile Include="Migrations\201811210515055_addAccountandusrtables.cs" />
+    <Compile Include="Migrations\201811210515055_addAccountandusrtables.Designer.cs">
+      <DependentUpon>201811210515055_addAccountandusrtables.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Contact\Contact.cs" />
@@ -448,11 +450,8 @@
     <EmbeddedResource Include="Migrations\201811131112269_update-phonenumber-field.resx">
       <DependentUpon>201811131112269_update-phonenumber-field.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201811191148204_AddedUserandAccounttables.resx">
-      <DependentUpon>201811191148204_AddedUserandAccounttables.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201811200110156_useraccount.resx">
-      <DependentUpon>201811200110156_useraccount.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201811210515055_addAccountandusrtables.resx">
+      <DependentUpon>201811210515055_addAccountandusrtables.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

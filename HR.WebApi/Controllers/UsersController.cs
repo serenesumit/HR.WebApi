@@ -1,4 +1,5 @@
-﻿using HR.WebApi.Helpers.Model;
+﻿using AutoMapper;
+using HR.WebApi.Helpers.Model;
 using HR.WebApi.Models;
 using HR.WebApi.Services;
 using System;
@@ -30,15 +31,23 @@ namespace HR.WebApi.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<User>> GetUsers()
+        public async Task<IEnumerable<UserModel>> GetUsers()
         {
-            return await this._userService.GetAll();
+            var result = await this._userService.GetAll();
+            List<UserModel> model = new List<UserModel>();
+            foreach (var user in result)
+            {
+                var userModel = Mapper.Map<UserModel>(user);
+                model.Add(userModel);
+            }
+
+            return model;
         }
 
 
         [Route("{accountId:int}/users")]
         [HttpGet]
-        public async Task<IEnumerable<User>> GetUsersByAccountId(Int32 accountId)
+        public async Task<IEnumerable<UserModel>> GetUsersByAccountId(Int32 accountId)
         {
             if (accountId == 0)
             {
@@ -52,7 +61,14 @@ namespace HR.WebApi.Controllers
             }
 
             var result = account.Users.ToList();
-            return result;
+            List<UserModel> model = new List<UserModel>();
+            foreach(var user in result)
+            {
+                var userModel = Mapper.Map<UserModel>(user);
+                model.Add(userModel);
+            }
+           
+            return model;
         }
 
 
@@ -78,57 +94,22 @@ namespace HR.WebApi.Controllers
 
         [HttpGet]
         [Route("{id:int}")]
-        public User GetUserById(Int32 id)
+        public UserModel GetUserById(Int32 id)
         {
-            return this._userService.Get(id);
+            var user = this._userService.Get(id);
+            if(user == null)
+            {
+                return null;
+            }
+
+            var userModel = Mapper.Map<UserModel>(user);
+            return userModel;
         }
 
 
-        // POST: api/Accounts
-        [ResponseType(typeof(User))]
-        [HttpPost]
-        public async Task<IHttpActionResult> PostUser(UserDTO model)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-            User user = new User();
-            user.Email = model.Email;
-            user.FirstName = model.FirstName;
-            this._userService.Add(user);
+       
 
-            return CreatedAtRoute("DefaultApi", new { id = user.Id }, user);
-        }
-
-
-        [HttpPut]
-        [Route("{userId:int}")]
-        public async Task<HttpResponseMessage> PutUser(Int32 userId, UserDTO model)
-        {
-            HttpResponseMessage result = null;
-
-            if (userId == 0 || model == null)
-            {
-                return Request.CreateResponse(HttpStatusCode.BadRequest);
-            }
-
-            User userModel = this._userService.Get(userId);
-            if (userModel == null)
-            {
-                return Request.CreateResponse(HttpStatusCode.NotFound);
-            }
-
-            userModel.Email = model.Email;
-            userModel.FirstName = model.FirstName;
-            this._userService.Add(userModel);
-
-            result = Request.CreateResponse(HttpStatusCode.OK, userModel);
-            return result;
-        }
-
-
-
+    
         [HttpDelete]
         [Route("{userid:int}")]
         public async Task<HttpResponseMessage> DeleteUser(Int32 userid)
@@ -148,7 +129,7 @@ namespace HR.WebApi.Controllers
 
             //await this._Acc.DeleteEventDocumentsByEventId(eventid.Value);
             await this._userService.DeleteUser(userid);
-            return Request.CreateResponse(HttpStatusCode.OK, userModel);
+            return Request.CreateResponse(HttpStatusCode.OK,  Mapper.Map<UserModel>(userModel));
         }
 
     }

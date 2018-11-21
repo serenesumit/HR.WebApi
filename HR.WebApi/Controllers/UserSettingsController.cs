@@ -41,29 +41,6 @@ namespace HR.WebApi.Controllers
 
 
 
-        [HttpPut]
-        [Route("{userSettingId:int}")]
-        public async Task<HttpResponseMessage> PutUserSetting(Int32 userSettingId, UserSettingDTO model)
-        {
-            HttpResponseMessage result = null;
-
-            if (userSettingId == 0 || model == null)
-            {
-                return Request.CreateResponse(HttpStatusCode.BadRequest);
-            }
-
-            UserSetting userSettingModel = this._userSettingService.Get(userSettingId);
-            if (userSettingModel == null)
-            {
-                return Request.CreateResponse(HttpStatusCode.NotFound);
-            }
-
-            userSettingModel.Settings = model.Settings;
-            this._userSettingService.Add(userSettingModel);
-
-            result = Request.CreateResponse(HttpStatusCode.OK, userSettingModel);
-            return result;
-        }
 
 
 

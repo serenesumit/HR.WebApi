@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -12,7 +13,8 @@ namespace HR.WebApi.Models
             this.Accounts = new HashSet<Account>();
         }
 
-        public Int32 Id { get; set; }
+        [Key]
+        public Int32 UID { get; set; }
 
         public string FirstName { get; set; }
 

@@ -144,8 +144,8 @@ namespace HR.WebApi.Repositories.Common
                .WithMany(c => c.Users)
                .Map(cs =>
                {
-                   cs.MapLeftKey("UserId");
-                   cs.MapRightKey("AccountId");
+                   cs.MapLeftKey("UID");
+                   cs.MapRightKey("AccountNumber");
                    cs.ToTable("UserAccounts");
                });
 

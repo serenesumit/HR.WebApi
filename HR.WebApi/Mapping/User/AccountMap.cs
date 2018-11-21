@@ -13,9 +13,9 @@ namespace HR.WebApi.Mapping
         public AccountMap()
         {
             // Primary Key
-            this.HasKey(t => t.Id);
+            this.HasKey(t => t.AccountNumber);
 
-            this.Property(t => t.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+            this.Property(t => t.AccountNumber).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
 
             // Properties
             this.Property(t => t.AccName).HasMaxLength(200);
@@ -23,7 +23,7 @@ namespace HR.WebApi.Mapping
 
             // Table & Column Mappings
             this.ToTable("Accounts");
-            this.Property(t => t.Id).HasColumnName("Id");
+            this.Property(t => t.AccountNumber).HasColumnName("AccountNumber");
             this.Property(t => t.AccName).HasColumnName("AccName");
 
         }

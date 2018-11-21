@@ -11,10 +11,10 @@ namespace HR.WebApi.Models
     {
         [Key]
         [Column(Order = 1)]
-        public Int32 UserId { get; set; }
+        public Int32 UID { get; set; }
 
         [Key]
         [Column(Order = 2)]
-        public Int32 AccountId { get; set; }
+        public Int32 AccountNumber { get; set; }
     }
 }

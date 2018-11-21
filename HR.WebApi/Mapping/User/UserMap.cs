@@ -13,9 +13,9 @@ namespace HR.WebApi.Mapping
         public UserMap()
         {
             // Primary Key
-            this.HasKey(t => t.Id);
+            this.HasKey(t => t.UID);
 
-            this.Property(t => t.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+            this.Property(t => t.UID).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
 
             // Properties
             this.Property(t => t.FirstName).HasMaxLength(200);
@@ -23,7 +23,7 @@ namespace HR.WebApi.Mapping
 
             // Table & Column Mappings
             this.ToTable("Users");
-            this.Property(t => t.Id).HasColumnName("Id");
+            this.Property(t => t.UID).HasColumnName("UID");
             this.Property(t => t.FirstName).HasColumnName("FirstName");
             this.Property(t => t.Email).HasColumnName("Email");
 

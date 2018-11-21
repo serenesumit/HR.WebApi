@@ -26,14 +26,14 @@ namespace HR.WebApi.Repositories
         {
             var result = new MethodResult<Account>();
 
-            if (model.Id == 0)
+            if (model.AccountNumber == 0)
             {
                 this._upRepository.Accounts.Add(model);
             }
             else
             {
 
-                var dbuserSetting = this._upRepository.Accounts.Where(x => x.Id == model.Id).FirstOrDefault();
+                var dbuserSetting = this._upRepository.Accounts.Where(x => x.AccountNumber == model.AccountNumber).FirstOrDefault();
             }
 
             this._upRepository.SaveChanges();
@@ -44,7 +44,7 @@ namespace HR.WebApi.Repositories
 
         public async Task<Account> DeleteAccount(int Id)
         {
-            var dbAccount = this._upRepository.Accounts.Where(p => p.Id == Id).FirstOrDefault();
+            var dbAccount = this._upRepository.Accounts.Where(p => p.AccountNumber == Id).FirstOrDefault();
 
             this._upRepository.Accounts.Remove(dbAccount);
             this._upRepository.SaveChanges();
@@ -53,7 +53,7 @@ namespace HR.WebApi.Repositories
 
         public Account Get(int id)
         {
-            return this._upRepository.Accounts.Include(p => p.Users).Where(p => p.Id == id).FirstOrDefault();
+            return this._upRepository.Accounts.Include(p => p.Users).Where(p => p.AccountNumber == id).FirstOrDefault();
         }
 
         public async Task<List<Account>> GetAll()

@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Cors;
 using System.Web.Http.Description;
+using AutoMapper;
 using HR.WebApi.Helpers.Model;
 using HR.WebApi.Models;
 using HR.WebApi.Repositories.Common;
@@ -37,14 +38,22 @@ namespace HR.WebApi.Controllers
         }
 
         // GET: api/Accounts
-        public IQueryable<Account> GetAccounts()
+        public IEnumerable<AccountModel> GetAccounts()
         {
-            return db.Accounts;
+            var result = db.Accounts;
+            List<AccountModel> model = new List<AccountModel>();
+            foreach (var account in result)
+            {
+                var accountModel = Mapper.Map<AccountModel>(account);
+                model.Add(accountModel);
+            }
+
+            return model;
         }
 
         [Route("{userId:int}/accounts")]
         [HttpGet]
-        public async Task<IEnumerable<Account>> GetAccountsByUserId(Int32 userId)
+        public async Task<IEnumerable<AccountModel>> GetAccountsByUserId(Int32 userId)
         {
             if (userId == 0)
             {
@@ -58,7 +67,14 @@ namespace HR.WebApi.Controllers
             }
 
             var result = user.Accounts.ToList();
-            return result;
+            List<AccountModel> model = new List<AccountModel>();
+            foreach (var account in result)
+            {
+                var accountModel = Mapper.Map<AccountModel>(account);
+                model.Add(accountModel);
+            }
+
+            return model;
         }
 
        
@@ -72,51 +88,11 @@ namespace HR.WebApi.Controllers
             {
                 return NotFound();
             }
-
-            return Ok(account);
+        
+            return Ok(Mapper.Map<AccountModel>(account));
         }
 
-        // PUT: api/Accounts/5
-        [ResponseType(typeof(void))]
-        [HttpPut]
-        public async Task<IHttpActionResult> PutAccount(int id, AccountDTO model)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            if (id != model.Id)
-            {
-                return BadRequest();
-            }
-
-            Account account = this._accountService.Get(id);
-            if (account == null)
-            {
-                return NotFound();
-            }
-            account.AccName = model.AccName;
-            this._accountService.Add(account);
-
-            return StatusCode(HttpStatusCode.NoContent);
-        }
-
-        // POST: api/Accounts
-        [ResponseType(typeof(Account))]
-        [HttpPost]
-        public async Task<IHttpActionResult> PostAccount(AccountDTO model)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-            Account account = new Account();
-            account.AccName = model.AccName;
-            this._accountService.Add(account);
-
-            return CreatedAtRoute("DefaultApi", new { id = account.Id }, account);
-        }
+      
 
         // DELETE: api/Accounts/5
         [ResponseType(typeof(Account))]
@@ -132,7 +108,7 @@ namespace HR.WebApi.Controllers
             await this._accountService.DeleteAccount(id);
 
 
-            return Ok(account);
+            return Ok(Mapper.Map<AccountModel>(account));
         }
 
         protected override void Dispose(bool disposing)
