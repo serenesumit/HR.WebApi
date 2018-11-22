@@ -14,6 +14,7 @@ namespace HR.WebApi.App_Start
 
         public static void Configure()
         {
+            Mapper.CreateMap<UserSetting, UserSettingDTO>().ReverseMap();
             Mapper.CreateMap<User, UserModel>().ReverseMap();
             Mapper.CreateMap<Account, AccountModel>().ReverseMap();
         }

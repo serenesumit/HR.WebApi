@@ -58,7 +58,7 @@ namespace HR.WebApi.Repositories.Common
 
         public IDbSet<Account> Accounts { get; set; }
 
-        public IDbSet<UserAccount> UserAccounts { get; set; }
+       // public IDbSet<UserAccount> UserAccounts { get; set; }
 
         
 

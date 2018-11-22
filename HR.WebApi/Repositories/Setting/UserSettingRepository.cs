@@ -33,8 +33,15 @@ namespace HR.WebApi.Repositories
 
                 var dbuserSetting = this._upRepository.Events.Where(x => x.Id == model.Id).FirstOrDefault();
             }
+            try
+            {
+                this._upRepository.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
 
-            this._upRepository.SaveChanges();
 
             result.Result = model;
             return result;

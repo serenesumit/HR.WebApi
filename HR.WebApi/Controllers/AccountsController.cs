@@ -23,8 +23,7 @@ namespace HR.WebApi.Controllers
     public class AccountsController : ApiController
     {
 
-        private DbContextRepository db = new DbContextRepository();
-
+      
         private readonly IAccountService _accountService;
         private readonly IUserService _userService;
 
@@ -37,36 +36,24 @@ namespace HR.WebApi.Controllers
             this._userService = userService;
         }
 
-        // GET: api/Accounts
-        public IEnumerable<AccountModel> GetAccounts()
-        {
-            var result = db.Accounts;
-            List<AccountModel> model = new List<AccountModel>();
-            foreach (var account in result)
-            {
-                var accountModel = Mapper.Map<AccountModel>(account);
-                model.Add(accountModel);
-            }
+ 
 
-            return model;
-        }
-
-        [Route("{userId:int}/accounts")]
+        [Route("{userId:int}/{searchTerm}")]
         [HttpGet]
-        public async Task<IEnumerable<AccountModel>> GetAccountsByUserId(Int32 userId)
+        public async Task<IEnumerable<AccountModel>> GetAccountsByUserId(Int32 UID,string searchTerm)
         {
-            if (userId == 0)
+            if (UID == 0)
             {
                 Request.CreateResponse(HttpStatusCode.BadRequest);
                 return null;
             }
-            var user = this._userService.Get(userId);
+            var user = this._userService.Get(UID);
             if (user == null)
             {
                 return null;
             }
 
-            var result = user.Accounts.ToList();
+            var result = user.Accounts.Where(p=>p.AccName !=null && p.AccName.Contains(searchTerm)).ToList();
             List<AccountModel> model = new List<AccountModel>();
             foreach (var account in result)
             {
@@ -78,48 +65,5 @@ namespace HR.WebApi.Controllers
         }
 
        
-
-        // GET: api/Accounts/5
-        [ResponseType(typeof(Account))]
-        public async Task<IHttpActionResult> GetAccount(int id)
-        {
-            Account account = this._accountService.Get(id);
-            if (account == null)
-            {
-                return NotFound();
-            }
-        
-            return Ok(Mapper.Map<AccountModel>(account));
-        }
-
-      
-
-        // DELETE: api/Accounts/5
-        [ResponseType(typeof(Account))]
-        [HttpDelete]
-        public async Task<IHttpActionResult> DeleteAccount(int id)
-        {
-            Account account = this._accountService.Get(id);
-            if (account == null)
-            {
-                return NotFound();
-            }
-
-            await this._accountService.DeleteAccount(id);
-
-
-            return Ok(Mapper.Map<AccountModel>(account));
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
-
-      
     }
 }

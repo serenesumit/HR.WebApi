@@ -102,3 +102,4 @@ D:\Live Projects\HR.WebApi\HR.WebApi\bin\log4net.dll
 D:\Live Projects\HR.WebApi\HR.WebApi\bin\AutoMapper.dll
 D:\Live Projects\HR.WebApi\HR.WebApi\bin\AutoMapper.xml
 D:\Live Projects\HR.WebApi\HR.WebApi\obj\Release\HR.WebApi.Migrations.addAccountandusrtables.resources
+D:\Live Projects\HR.WebApi\HR.WebApi\obj\Release\HR.WebApi.Migrations.updateusersettingid.resources

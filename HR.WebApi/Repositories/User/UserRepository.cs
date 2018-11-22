@@ -51,12 +51,12 @@ namespace HR.WebApi.Repositories
 
         public User Get(int id)
         {
-            return this._upRepository.Users.Include(p => p.Accounts).Where(p => p.UID == id).FirstOrDefault();
+            return this._upRepository.Users.Include(p => p.UserSetting).Where(p => p.UID == id).FirstOrDefault();
         }
 
         public async Task<List<User>> GetAll()
         {
-            return this._upRepository.Users.Include(p => p.Accounts).ToList();
+            return this._upRepository.Users.Include(p => p.UserSetting).ToList();
         }
     }
 }

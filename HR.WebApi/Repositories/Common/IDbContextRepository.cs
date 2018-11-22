@@ -46,7 +46,7 @@ namespace HR.WebApi.Repositories.Common
 
         IDbSet<Account> Accounts { get; set; }
 
-        IDbSet<UserAccount> UserAccounts { get; set; }
+       // IDbSet<UserAccount> UserAccounts { get; set; }
 
 
         int SaveChanges();

@@ -243,7 +243,6 @@
     <Compile Include="Helpers\Model\AccountDTO.cs" />
     <Compile Include="Helpers\Model\AccountModel.cs" />
     <Compile Include="Helpers\Model\ContactDTO.cs" />
-    <Compile Include="Helpers\Model\ContactModel.cs" />
     <Compile Include="Helpers\Model\EmployeeModel.cs" />
     <Compile Include="Helpers\Model\EventModel.cs" />
     <Compile Include="Helpers\Model\MethodResult.cs" />
@@ -282,6 +281,10 @@
     <Compile Include="Migrations\201811210515055_addAccountandusrtables.Designer.cs">
       <DependentUpon>201811210515055_addAccountandusrtables.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201811212356419_updateusersettingid.cs" />
+    <Compile Include="Migrations\201811212356419_updateusersettingid.Designer.cs">
+      <DependentUpon>201811212356419_updateusersettingid.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Contact\Contact.cs" />
     <Compile Include="Models\Contact\ContactDoc.cs" />
@@ -295,7 +298,6 @@
     <Compile Include="Models\Event\EventType.cs" />
     <Compile Include="Models\User\Account.cs" />
     <Compile Include="Models\User\User.cs" />
-    <Compile Include="Models\User\UserAccount.cs" />
     <Compile Include="Models\User\UserSetting.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\Account\AccountRepository.cs" />
@@ -452,6 +454,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201811210515055_addAccountandusrtables.resx">
       <DependentUpon>201811210515055_addAccountandusrtables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811212356419_updateusersettingid.resx">
+      <DependentUpon>201811212356419_updateusersettingid.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

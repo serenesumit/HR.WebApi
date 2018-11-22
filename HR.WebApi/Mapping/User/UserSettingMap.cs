@@ -15,7 +15,7 @@ namespace HR.WebApi.Mapping
             // Primary Key
             this.HasKey(t => t.Id);
 
-            this.Property(t => t.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+            this.Property(t => t.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
 
             // Properties
             this.Property(t => t.Settings);

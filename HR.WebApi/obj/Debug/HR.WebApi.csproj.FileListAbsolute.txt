@@ -102,3 +102,4 @@ D:\Live Projects\HR.WebApi\HR.WebApi\obj\Debug\HR.WebApi.csprojAssemblyReference
 D:\Live Projects\HR.WebApi\HR.WebApi\obj\Debug\HR.WebApi.Migrations.addAccountandusrtables.resources
 D:\Live Projects\HR.WebApi\HR.WebApi\bin\AutoMapper.dll
 D:\Live Projects\HR.WebApi\HR.WebApi\bin\AutoMapper.xml
+D:\Live Projects\HR.WebApi\HR.WebApi\obj\Debug\HR.WebApi.Migrations.updateusersettingid.resources
