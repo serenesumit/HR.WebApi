@@ -72,6 +72,9 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.Entity.Repository, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.Entity.Repository.2.0.0.0\lib\net45\System.Data.Entity.Repository.dll</HintPath>
+    </Reference>
     <Reference Include="System.Drawing" />
     <Reference Include="System.Net.Http.Formatting, Version=5.2.6.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.6\lib\net45\System.Net.Http.Formatting.dll</HintPath>
@@ -251,6 +254,7 @@
     <Compile Include="Helpers\Model\UserDTO.cs" />
     <Compile Include="Helpers\Model\UserModel.cs" />
     <Compile Include="Helpers\Model\UserSettingDTO.cs" />
+    <Compile Include="Mapping\Common\AuditMap.cs" />
     <Compile Include="Mapping\Contact\ContactDocMap.cs" />
     <Compile Include="Mapping\Contact\ContactMap.cs" />
     <Compile Include="Mapping\Contact\DepartmentMap.cs" />
@@ -285,7 +289,13 @@
     <Compile Include="Migrations\201811212356419_updateusersettingid.Designer.cs">
       <DependentUpon>201811212356419_updateusersettingid.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201811261101492_addedAuditTable.cs" />
+    <Compile Include="Migrations\201811261101492_addedAuditTable.Designer.cs">
+      <DependentUpon>201811261101492_addedAuditTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Common\Audit.cs" />
+    <Compile Include="Models\Common\IDescribableEntity.cs" />
     <Compile Include="Models\Contact\Contact.cs" />
     <Compile Include="Models\Contact\ContactDoc.cs" />
     <Compile Include="Models\Contact\Department.cs" />
@@ -457,6 +467,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201811212356419_updateusersettingid.resx">
       <DependentUpon>201811212356419_updateusersettingid.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811261101492_addedAuditTable.resx">
+      <DependentUpon>201811261101492_addedAuditTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
