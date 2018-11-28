@@ -1,9 +1,11 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace HR.WebApi.Models.Common
 {
     public class Audit
     {
+        [Key]
         public long Id { get; set; }
 
         public string TableName { get; set; }

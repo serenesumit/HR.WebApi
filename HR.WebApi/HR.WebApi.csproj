@@ -269,6 +269,7 @@
     <Compile Include="Helpers\Model\UserModel.cs" />
     <Compile Include="Helpers\Model\UserSettingDTO.cs" />
     <Compile Include="Mapping\Common\AuditMap.cs" />
+    <Compile Include="Mapping\Common\ErrorLogMap.cs" />
     <Compile Include="Mapping\Contact\ContactDocMap.cs" />
     <Compile Include="Mapping\Contact\ContactMap.cs" />
     <Compile Include="Mapping\Contact\DepartmentMap.cs" />
@@ -311,9 +312,13 @@
     <Compile Include="Migrations\201811280522525_updateAuditTable.Designer.cs">
       <DependentUpon>201811280522525_updateAuditTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201811280826528_addErrorLogTable.cs" />
+    <Compile Include="Migrations\201811280826528_addErrorLogTable.Designer.cs">
+      <DependentUpon>201811280826528_addErrorLogTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Common\Audit.cs" />
-    <Compile Include="Models\Common\IDescribableEntity.cs" />
+    <Compile Include="Models\Common\ErrorLog.cs" />
     <Compile Include="Models\Contact\Contact.cs" />
     <Compile Include="Models\Contact\ContactDoc.cs" />
     <Compile Include="Models\Contact\Department.cs" />
@@ -491,6 +496,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201811280522525_updateAuditTable.resx">
       <DependentUpon>201811280522525_updateAuditTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811280826528_addErrorLogTable.resx">
+      <DependentUpon>201811280826528_addErrorLogTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

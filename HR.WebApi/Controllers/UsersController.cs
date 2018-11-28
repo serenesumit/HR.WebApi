@@ -32,7 +32,9 @@ namespace HR.WebApi.Controllers
             {
                 return null;
             }
-            
+
+           // throw new System.ArgumentException("Parameter cannot be null", "original");
+
             var userModel = Mapper.Map<UserModel>(user);
 
             return userModel;

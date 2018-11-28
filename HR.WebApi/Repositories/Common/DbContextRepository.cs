@@ -20,6 +20,7 @@ namespace HR.WebApi.Repositories.Common
     using System.Data.Entity.Infrastructure;
     using System.Linq;
     using System.Text;
+    using System.Threading.Tasks;
 
 
     #endregion
@@ -69,7 +70,9 @@ namespace HR.WebApi.Repositories.Common
         // public IDbSet<UserAccount> UserAccounts { get; set; }
 
 
-        public DbSet<Audit> Audits { get; set; }
+        public IDbSet<Audit> Audits { get; set; }
+
+        public IDbSet<ErrorLog> ErrorLogs { get; set; }
 
 
         public DbContext DbContext
@@ -78,6 +81,11 @@ namespace HR.WebApi.Repositories.Common
             {
                 return this;
             }
+        }
+
+        public async Task<int> SaveChangesAsync()
+        {
+            return await base.SaveChangesAsync();
         }
 
         public int SaveChanges()
@@ -117,6 +125,7 @@ namespace HR.WebApi.Repositories.Common
             modelBuilder.Configurations.Add(new UserSettingMap());
             modelBuilder.Configurations.Add(new AccountMap());
             modelBuilder.Configurations.Add(new AuditMap());
+            modelBuilder.Configurations.Add(new ErrorLogMap());
 
             modelBuilder.Entity<User>()
                .HasOptional(s => s.UserSetting)
@@ -156,9 +165,9 @@ namespace HR.WebApi.Repositories.Common
 
         private string GetPrimaryKey(DbEntityEntry dbEntry)
         {
-           string keyName = dbEntry.Entity.GetType().GetProperties().Single(p => p.GetCustomAttributes(typeof(KeyAttribute), true).Count() > 0).Name;
+            string keyName = dbEntry.Entity.GetType().GetProperties().Single(p => p.GetCustomAttributes(typeof(KeyAttribute), true).Count() > 0).Name;
 
-           // string keyName = "Id";
+            // string keyName = "Id";
             string primaryKeyValue = dbEntry.CurrentValues.GetValue<object>(keyName).ToString();
             return primaryKeyValue;
         }

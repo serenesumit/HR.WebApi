@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace HR.WebApi.Repositories.Common
+﻿namespace HR.WebApi.Repositories.Common
 {
     using HR.WebApi.Models;
+    using HR.WebApi.Models.Common;
 
 
     #region using
@@ -48,6 +43,11 @@ namespace HR.WebApi.Repositories.Common
 
         // IDbSet<UserAccount> UserAccounts { get; set; }
 
+        IDbSet<Audit> Audits { get; set; }
+
+        IDbSet<ErrorLog> ErrorLogs { get; set; }
+
+        Task<int> SaveChangesAsync();
 
         int SaveChanges();
     }

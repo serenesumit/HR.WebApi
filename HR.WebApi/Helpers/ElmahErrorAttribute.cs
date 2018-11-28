@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using HR.WebApi.Models.Common;
+using HR.WebApi.Repositories.Common;
+using System;
+using System.Data.Entity;
 
 namespace HR.WebApi.Helpers
 {
@@ -15,14 +15,39 @@ namespace HR.WebApi.Helpers
 
             if (actionExecutedContext.Exception != null)
             {
-              Elmah.ErrorSignal.FromCurrentContext().Raise(actionExecutedContext.Exception);
+                Elmah.ErrorSignal.FromCurrentContext().Raise(actionExecutedContext.Exception);
+                try
+                {
+                    using (var dbcontext = new DbContextRepository())
+                    {
+                        ErrorLog errorLog = new ErrorLog();
 
-                var test = actionExecutedContext.Exception.InnerException;
-                var test1 = actionExecutedContext.Exception.Data;
-                var test2 = actionExecutedContext.Exception.Message;
-                var test3 = actionExecutedContext.Exception.Source;
+                        errorLog.MethodName = actionExecutedContext.Exception.TargetSite.Name;
+                        errorLog.ControllerName = actionExecutedContext.Exception.TargetSite.DeclaringType.Name;
+                        var customAtttribute = actionExecutedContext.Exception.TargetSite.CustomAttributes;
+                        foreach (var attr in customAtttribute)
+                        {
+                            errorLog.VerbAttribute = attr.AttributeType.Name;
+                            break;
+                        }
+
+                        errorLog.ErrorMessage = actionExecutedContext.Exception.Message;
+
+                        errorLog.UserId = 1;
+                        errorLog.CreatedDate = DateTime.UtcNow;
+                        dbcontext.Entry(errorLog).State = EntityState.Added;
+                        dbcontext.ErrorLogs.Add(errorLog);
+                        dbcontext.SaveChangesAsync();
+                    }
+
+                }
+                catch (Exception ex)
+                {
+
+                }
+
             }
-                
+
 
             base.OnException(actionExecutedContext);
         }

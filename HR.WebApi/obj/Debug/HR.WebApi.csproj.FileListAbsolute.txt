@@ -216,3 +216,4 @@ C:\My Folder\Live Projects\projects\HR.WebApi\HR.WebApi\bin\Elmah.Io.dll
 C:\My Folder\Live Projects\projects\HR.WebApi\HR.WebApi\bin\Microsoft.Rest.ClientRuntime.dll
 C:\My Folder\Live Projects\projects\HR.WebApi\HR.WebApi\bin\Elmah.Contrib.WebApi.xml
 C:\My Folder\Live Projects\projects\HR.WebApi\HR.WebApi\obj\Debug\HR.WebApi.Migrations.updateAuditTable.resources
+C:\My Folder\Live Projects\projects\HR.WebApi\HR.WebApi\obj\Debug\HR.WebApi.Migrations.addErrorLogTable.resources
