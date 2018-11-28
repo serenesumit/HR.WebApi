@@ -177,7 +177,16 @@ namespace HR.WebApi.Repositories.Common
             StringBuilder newValues = new StringBuilder();
             foreach (var propertyName in dbEntry.CurrentValues.PropertyNames)
             {
-                newValues = newValues.Append(propertyName + "=" + dbEntry.CurrentValues.GetValue<object>(propertyName).ToString() + ",");
+                var value = dbEntry.CurrentValues.GetValue<object>(propertyName);
+                if (value != null)
+                {
+                    newValues = newValues.Append(propertyName + "=" + value.ToString() + ",");
+                }
+                else
+                {
+                    newValues = newValues.Append(propertyName + "= ,");
+                }
+
             }
             string result = "";
             if (newValues != null)
@@ -217,7 +226,6 @@ namespace HR.WebApi.Repositories.Common
             else if (dbEntry.State == EntityState.Deleted)
             {
                 var props = dbEntry.Entity.GetType().GetProperties();
-                var keyName = props.Single(p => p.GetCustomAttributes(typeof(KeyAttribute), false).Any()).Name;
 
                 result.Add(new Audit()
                 {

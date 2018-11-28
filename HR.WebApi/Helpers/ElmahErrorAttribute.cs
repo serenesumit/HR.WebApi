@@ -37,7 +37,7 @@ namespace HR.WebApi.Helpers
                         errorLog.CreatedDate = DateTime.UtcNow;
                         dbcontext.Entry(errorLog).State = EntityState.Added;
                         dbcontext.ErrorLogs.Add(errorLog);
-                        dbcontext.SaveChangesAsync();
+                        dbcontext.SaveChanges();
                     }
 
                 }
