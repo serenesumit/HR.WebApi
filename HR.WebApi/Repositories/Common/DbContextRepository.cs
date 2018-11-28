@@ -9,6 +9,7 @@ namespace HR.WebApi.Repositories.Common
     using HR.WebApi.Models.Common;
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
     #region using
@@ -18,6 +19,7 @@ namespace HR.WebApi.Repositories.Common
     using System.Data.Entity.Core.Objects;
     using System.Data.Entity.Infrastructure;
     using System.Linq;
+    using System.Text;
 
 
     #endregion
@@ -84,7 +86,7 @@ namespace HR.WebApi.Repositories.Common
             foreach (var ent in this.ChangeTracker.Entries().Where(p => p.State == EntityState.Added || p.State == EntityState.Deleted || p.State == EntityState.Modified))
             {
                 // For each changed record, get the audit record entries and add them
-                foreach (Audit x in GetAuditRecordsForChange(ent))
+                foreach (Audit x in GetAuditRecordsForChange(ent, "1"))
                 {
                     this.Audits.Add(x);
                 }
@@ -93,6 +95,7 @@ namespace HR.WebApi.Repositories.Common
             // Call the original SaveChanges(), which will save both the changes made and the audit records
             return base.SaveChanges();
         }
+
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -151,71 +154,108 @@ namespace HR.WebApi.Repositories.Common
             return entitySetName;
         }
 
-        private List<Audit> GetAuditRecordsForChange(DbEntityEntry dbEntry)
+        private string GetPrimaryKey(DbEntityEntry dbEntry)
+        {
+            //string keyName = dbEntry.Entity.GetType().GetProperties().Single(p => p.GetCustomAttributes(typeof(KeyAttribute), true).Count() > 0).Name;
+
+            string keyName = "Id";
+            string primaryKeyValue = dbEntry.CurrentValues.GetValue<object>(keyName).ToString();
+            return primaryKeyValue;
+        }
+
+        public string GetPropertieswithValues(DbEntityEntry dbEntry)
+        {
+            StringBuilder newValues = new StringBuilder();
+            foreach (var propertyName in dbEntry.CurrentValues.PropertyNames)
+            {
+                newValues = newValues.Append(propertyName + "=" + dbEntry.CurrentValues.GetValue<object>(propertyName).ToString() + ",");
+            }
+            string result = "";
+            if (newValues != null)
+            {
+                result = Convert.ToString(newValues);
+            }
+
+            return result;
+        }
+
+
+        private List<Audit> GetAuditRecordsForChange(DbEntityEntry dbEntry, string userId)
         {
             List<Audit> result = new List<Audit>();
 
-            DateTime changeTime = DateTime.UtcNow;
-
             // Get the Table() attribute, if one exists
-            TableAttribute tableAttr = dbEntry.Entity.GetType().GetCustomAttributes(typeof(TableAttribute), false).SingleOrDefault() as TableAttribute;
+            var tableAttr = dbEntry.Entity.GetType().GetCustomAttributes(typeof(TableAttribute), false).SingleOrDefault() as TableAttribute;
 
             // Get table name (if it has a Table attribute, use that, otherwise get the pluralized name)
             var tableName = GetTableName(dbEntry);
-            //  string tableName = tableAttr != null ? tableAttr.Name : dbEntry.Entity.GetType().Name;
-
-            // Get primary key value (If you have more than one key column, this will need to be adjusted)
-            // string keyName = dbEntry.Entity.GetType().GetProperties().Single(p => p.GetCustomAttributes(typeof(KeyAttribute), false).Count() > 0).Name;
-
             if (dbEntry.State == EntityState.Added)
             {
                 // For Inserts, just add the whole record
                 // If the entity implements IDescribableEntity, use the description from Describe(), otherwise use ToString()
                 result.Add(new Audit()
                 {
-                    UtcDatetime = changeTime,
                     Action = "Added", // Added
                     TableName = tableName,
+                    UtcDatetime = DateTime.UtcNow,
+                    RecordID = GetPrimaryKey(dbEntry),
 
-                    NewValues = (dbEntry.CurrentValues.ToObject() is IDescribableEntity) ? (dbEntry.CurrentValues.ToObject() as IDescribableEntity).Describe() : dbEntry.CurrentValues.ToObject().ToString()
-                }
-                    );
+                    NewValues = GetPropertieswithValues(dbEntry),
+                    CreatedBy = userId,
+                    CreatedDate = DateTime.UtcNow
+                });
             }
             else if (dbEntry.State == EntityState.Deleted)
             {
-                // Same with deletes, do the whole record, and use either the description from Describe() or ToString()
+                var props = dbEntry.Entity.GetType().GetProperties();
+                var keyName = props.Single(p => p.GetCustomAttributes(typeof(KeyAttribute), false).Any()).Name;
+
                 result.Add(new Audit()
                 {
-                    UtcDatetime = changeTime,
                     Action = "Deleted", // Deleted
                     TableName = tableName,
-                    NewValues = (dbEntry.OriginalValues.ToObject() is IDescribableEntity) ? (dbEntry.OriginalValues.ToObject() as IDescribableEntity).Describe() : dbEntry.OriginalValues.ToObject().ToString()
-                }
-                    );
+                    UtcDatetime = DateTime.UtcNow,
+                    RecordID = GetPrimaryKey(dbEntry),
+                    NewValues = GetPropertieswithValues(dbEntry),
+                    CreatedBy = userId,
+                    CreatedDate = DateTime.UtcNow
+                });
             }
             else if (dbEntry.State == EntityState.Modified)
             {
-                foreach (string propertyName in dbEntry.OriginalValues.PropertyNames)
+                var originalEntry = dbEntry.GetDatabaseValues();
+                StringBuilder newValues = new StringBuilder();
+                StringBuilder oldValues = new StringBuilder();
+                foreach (var propertyName in dbEntry.OriginalValues.PropertyNames)
                 {
                     // For updates, we only want to capture the columns that actually changed
                     if (!object.Equals(dbEntry.OriginalValues.GetValue<object>(propertyName), dbEntry.CurrentValues.GetValue<object>(propertyName)))
                     {
-                        result.Add(new Audit()
-                        {
-                            UtcDatetime = changeTime,
-                            Action = "Modified",    // Modified
-                            TableName = tableName,
-                            OldValues = dbEntry.OriginalValues.GetValue<object>(propertyName) == null ? null : dbEntry.OriginalValues.GetValue<object>(propertyName).ToString(),
-                            NewValues = dbEntry.CurrentValues.GetValue<object>(propertyName) == null ? null : dbEntry.CurrentValues.GetValue<object>(propertyName).ToString()
-                        }
-                            );
+                        var props = dbEntry.Entity.GetType().GetProperties();
+                        var keyName = props.Single(p => p.GetCustomAttributes(typeof(KeyAttribute), false).Any()).Name;
+                        oldValues = oldValues.Append(propertyName + "=" + originalEntry.GetValue<object>(propertyName).ToString() + ",");
+                        newValues = newValues.Append(propertyName + "=" + dbEntry.CurrentValues.GetValue<object>(propertyName).ToString() + ",");
                     }
                 }
+
+                result.Add(new Audit()
+                {
+                    Action = "Modified",
+                    TableName = tableName,
+                    UtcDatetime = DateTime.UtcNow,
+                    // RecordID = dbEntry.OriginalValues.GetValue<object>(keyName).ToString(),
+                    RecordID = GetPrimaryKey(dbEntry),
+                    OldValues = oldValues.ToString(),
+                    NewValues = newValues.ToString(),
+                    CreatedBy = userId,
+                    CreatedDate = DateTime.UtcNow
+                });
+
+
             }
 
             return result;
         }
-
 
     }
 }

@@ -147,7 +147,6 @@ C:\My Folder\Live Projects\projects\HR.WebApi\HR.WebApi\bin\Antlr3.Runtime.dll
 C:\My Folder\Live Projects\projects\HR.WebApi\HR.WebApi\bin\AutoMapper.dll
 C:\My Folder\Live Projects\projects\HR.WebApi\HR.WebApi\bin\EntityFramework.dll
 C:\My Folder\Live Projects\projects\HR.WebApi\HR.WebApi\bin\EntityFramework.SqlServer.dll
-C:\My Folder\Live Projects\projects\HR.WebApi\HR.WebApi\bin\log4net.dll
 C:\My Folder\Live Projects\projects\HR.WebApi\HR.WebApi\bin\Microsoft.AI.Agent.Intercept.dll
 C:\My Folder\Live Projects\projects\HR.WebApi\HR.WebApi\bin\Microsoft.AI.DependencyCollector.dll
 C:\My Folder\Live Projects\projects\HR.WebApi\HR.WebApi\bin\Microsoft.AI.PerfCounterCollector.dll
@@ -210,3 +209,10 @@ C:\My Folder\Live Projects\projects\HR.WebApi\HR.WebApi\bin\Microsoft.AI.Web.xml
 C:\My Folder\Live Projects\projects\HR.WebApi\HR.WebApi\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
 C:\My Folder\Live Projects\projects\HR.WebApi\HR.WebApi\obj\Debug\HR.WebApi.csproj.CopyComplete
 C:\My Folder\Live Projects\projects\HR.WebApi\HR.WebApi\obj\Debug\HR.WebApi.Migrations.addedAuditTable.resources
+C:\My Folder\Live Projects\projects\HR.WebApi\HR.WebApi\bin\Elmah.Contrib.WebApi.dll
+C:\My Folder\Live Projects\projects\HR.WebApi\HR.WebApi\bin\Elmah.dll
+C:\My Folder\Live Projects\projects\HR.WebApi\HR.WebApi\bin\Elmah.Io.Client.dll
+C:\My Folder\Live Projects\projects\HR.WebApi\HR.WebApi\bin\Elmah.Io.dll
+C:\My Folder\Live Projects\projects\HR.WebApi\HR.WebApi\bin\Microsoft.Rest.ClientRuntime.dll
+C:\My Folder\Live Projects\projects\HR.WebApi\HR.WebApi\bin\Elmah.Contrib.WebApi.xml
+C:\My Folder\Live Projects\projects\HR.WebApi\HR.WebApi\obj\Debug\HR.WebApi.Migrations.updateAuditTable.resources

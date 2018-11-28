@@ -1,8 +1,6 @@
-﻿using MultipartDataMediaFormatter;
+﻿using HR.WebApi.Helpers;
+using MultipartDataMediaFormatter;
 using MultipartDataMediaFormatter.Infrastructure;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Web.Http;
 
 namespace HR.WebApi
@@ -11,6 +9,7 @@ namespace HR.WebApi
     {
         public static void Register(HttpConfiguration config)
         {
+           
             // Web API configuration and services=
             config.EnableCors();
             // Web API routes
@@ -21,6 +20,8 @@ namespace HR.WebApi
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+
+            config.Filters.Add(new ElmahErrorAttribute());
         }
     }
 }

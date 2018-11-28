@@ -1,16 +1,9 @@
 ﻿using AutoMapper;
 using HR.WebApi.Helpers.Model;
-using HR.WebApi.Models;
 using HR.WebApi.Services;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Cors;
-using System.Web.Http.Description;
 
 namespace HR.WebApi.Controllers
 {
@@ -29,18 +22,19 @@ namespace HR.WebApi.Controllers
             this._userService = userService;
             this._accountService = accountService;
         }
-        
+
         [HttpGet]
         [Route("{UID:int}")]
         public UserModel GetUserById(Int32 UID)
         {
             var user = this._userService.Get(UID);
-            if(user == null)
+            if (user == null)
             {
                 return null;
             }
-
+            
             var userModel = Mapper.Map<UserModel>(user);
+
             return userModel;
         }
 

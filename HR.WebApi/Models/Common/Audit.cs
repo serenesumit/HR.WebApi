@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace HR.WebApi.Models.Common
 {
@@ -20,5 +17,11 @@ namespace HR.WebApi.Models.Common
         public string OldValues { get; set; }
 
         public string NewValues { get; set; }
+
+        public string CreatedBy { get; set; }
+
+        public DateTime CreatedDate { get; set; }
+
+        public string RecordID { get; set; }
     }
 }

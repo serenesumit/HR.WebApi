@@ -48,19 +48,31 @@
     <Reference Include="AutoMapper, Version=4.2.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
       <HintPath>..\packages\AutoMapper.4.2.0\lib\net45\AutoMapper.dll</HintPath>
     </Reference>
+    <Reference Include="Elmah, Version=1.2.14706.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\elmah.corelibrary.1.2.2\lib\Elmah.dll</HintPath>
+    </Reference>
+    <Reference Include="Elmah.Contrib.WebApi, Version=1.0.10.25, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Elmah.Contrib.WebApi.1.0.10.25\lib\net45\Elmah.Contrib.WebApi.dll</HintPath>
+    </Reference>
+    <Reference Include="Elmah.Io, Version=3.3.45.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Elmah.Io.WebApi.3.3.45\lib\net45\Elmah.Io.dll</HintPath>
+    </Reference>
+    <Reference Include="Elmah.Io.Client, Version=3.2.54.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Elmah.Io.Client.3.2.54\lib\net45\Elmah.Io.Client.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
-    <Reference Include="log4net, Version=1.2.15.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
-      <HintPath>..\packages\log4net-1.2.15.1.2.15\lib\log4net.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.Azure.KeyVault.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Azure.KeyVault.Core.1.0.0\lib\net40\Microsoft.Azure.KeyVault.Core.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Rest.ClientRuntime, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Rest.ClientRuntime.2.3.6\lib\net45\Microsoft.Rest.ClientRuntime.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.WindowsAzure.Storage, Version=9.3.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\WindowsAzure.Storage.9.3.2\lib\net45\Microsoft.WindowsAzure.Storage.dll</HintPath>
     </Reference>
@@ -76,6 +88,7 @@
       <HintPath>..\packages\System.Data.Entity.Repository.2.0.0.0\lib\net45\System.Data.Entity.Repository.dll</HintPath>
     </Reference>
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Net" />
     <Reference Include="System.Net.Http.Formatting, Version=5.2.6.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.6\lib\net45\System.Net.Http.Formatting.dll</HintPath>
     </Reference>
@@ -243,6 +256,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\ElmahErrorAttribute.cs" />
     <Compile Include="Helpers\Model\AccountDTO.cs" />
     <Compile Include="Helpers\Model\AccountModel.cs" />
     <Compile Include="Helpers\Model\ContactDTO.cs" />
@@ -292,6 +306,10 @@
     <Compile Include="Migrations\201811261101492_addedAuditTable.cs" />
     <Compile Include="Migrations\201811261101492_addedAuditTable.Designer.cs">
       <DependentUpon>201811261101492_addedAuditTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201811280522525_updateAuditTable.cs" />
+    <Compile Include="Migrations\201811280522525_updateAuditTable.Designer.cs">
+      <DependentUpon>201811280522525_updateAuditTable.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Common\Audit.cs" />
@@ -470,6 +488,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201811261101492_addedAuditTable.resx">
       <DependentUpon>201811261101492_addedAuditTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811280522525_updateAuditTable.resx">
+      <DependentUpon>201811280522525_updateAuditTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
