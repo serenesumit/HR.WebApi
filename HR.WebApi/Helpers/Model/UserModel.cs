@@ -8,7 +8,7 @@ namespace HR.WebApi.Helpers.Model
 {
     public class UserModel
     {
-        public Int32 Id { get; set; }
+        public Int32 UId { get; set; }
 
         public string FirstName { get; set; }
 
