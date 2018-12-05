@@ -165,9 +165,10 @@ namespace HR.WebApi.Repositories.Common
 
         private string GetPrimaryKey(DbEntityEntry dbEntry)
         {
-            string keyName = dbEntry.Entity.GetType().GetProperties().Single(p => p.GetCustomAttributes(typeof(KeyAttribute), true).Count() > 0).Name;
+            string keyName = dbEntry.Entity.GetType().GetProperties().FirstOrDefault(p => p.GetCustomAttributes(typeof(KeyAttribute), true).Count() > 0).Name;
 
             // string keyName = "Id";
+            if (string.IsNullOrEmpty(keyName)) return string.Empty;
             string primaryKeyValue = dbEntry.CurrentValues.GetValue<object>(keyName).ToString();
             return primaryKeyValue;
         }
